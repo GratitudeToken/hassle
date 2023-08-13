@@ -1,25 +1,11 @@
 const path = require('path')
 const express = require('express')
-const multer = require("multer") // we use this for storing images and other files sent from the user
-const Joi = require('joi') // this is for data validation sent from front-end
-const fs = require('fs') // this is for saving or reading files to the server
-const Post = require('./methods/posts') // class / constructor
-const { Vote, userInfo } = require('./methods/posts') // functions ?  variables
+const Joi = require('joi')
+const fs = require('fs')
+const google = require('googlethis')
+const Hassle = require('./methods/hassles')
+const { members } = require('./methods/hassles')
 
-// configuration for multer
-let storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/uploads/')
-  },
-  filename: function (req, file, cb) {
-    let extArray = file.mimetype.split("/")
-    let extension = extArray[extArray.length - 1]
-    let newFileName = file.fieldname + '-' + Date.now() + '.' + extension
-    cb(null, newFileName)
-  }
-})
-
-const upload = multer({ storage: storage })
 
 const app = express()
 
@@ -29,175 +15,183 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')))
 
+// google image search
+app.get('/images', async (req, res) => {
+  const results = await google.image(req.query.image, { safe: false })
+  res.send({ "status": 200, "results": results })
+})
 
 
-// GETs all data from posts.json file 
-app.get('/getposts', (req, res) => {
+// GETs all data from hassles.json file 
+app.get('/gethassles', (req, res) => {
 
-  let readPosts = JSON.parse(fs.readFileSync('./data/posts.json'))
-  let readVotes = JSON.parse(fs.readFileSync('./data/votes.json'))
-  let members = JSON.parse(fs.readFileSync(`./data/members.json`))
-  //let comments
+  let response = {}
 
-  if (req.query.id) {
-    //let posts = readPosts.filter(title => title.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '') === req.query.title)
-    let posts = readPosts.filter(id => id.id == req.query.id)
+  const types = { "weekly": 0, "monthly": 1, "wishlist": 2, "crowdfunded": 3 }
+  let privacy
+  const auth = req.query.auth // this is the authenticated user
+  const user = req.query.user // this is the user from url format, Example: domain?user=lucianape3
+  let userToRead
 
-    let votes
-    let comments = {}
-    if (posts[0]) {
-      if (fs.existsSync(`./data/comments/#${posts[0].id}.json`)) {
-        comments.comments = JSON.parse(fs.readFileSync('./data/comments/#' + posts[0].id + '.json'))
-      } else { comments = null }
-    }
-    if (posts.length > 0) {
-      votes = readVotes.filter(vote => vote.id === posts[0].id)
-    } else {
-      posts, votes, comments = null
-    }
-    res.send({ posts, votes, comments, members })
+  const stats = JSON.parse(fs.readFileSync(`./hassle-data/stats.json`))
+  const members = JSON.parse(fs.readFileSync(`./hassle-data/members.json`))
+
+
+  //search function
+  const searchStringInJSON = (str, json) => {
+    const string = str.toLowerCase()
+    json.forEach(object => {
+
+      for (var key in object) {
+        if (key === 'title' && object[key].toLowerCase().includes(string)) {
+          results.push(object)
+          break
+        }
+      }
+
+    })
+    return results
   }
 
-  else if (req.query.tag) {
-    let posts = readPosts.filter(post => post.tags.includes(req.query.tag))
-    let votes = []
-
-    if (posts.length > 0) {
-      posts.forEach((el, i) => {
-        let oneObject = readVotes.filter(vote => vote.id === el.id)
-        votes.push(oneObject[0])
-      })
-    } else {
-      posts, votes = null
+  if (auth && auth != undefined && auth != 'undefined' && auth != 'null' && auth != 'false' && auth != 'true') {
+    userToRead = auth
+    if (req.query.user != auth && req.query.user != undefined && req.query.user != 'undefined' && req.query.user != 'null' && req.query.user != 'false' && req.query.user != 'true') {
+      userToRead = req.query.user
     }
-    res.send({ posts, votes, members })
-  }
+  } else { userToRead = req.query.user }
 
-  else if (req.query.search) {
+  fs.readFile(`./hassle-data/users/${userToRead}.json`, (err, fileContent) => {
+    if (!err) {
+      // no error? proceed...
+      let diskHassles = JSON.parse(fileContent)
+      let hassles = diskHassles.hassles[req.query.type]
+      privacy = diskHassles.privacy
 
-    const s = req.query.search
-    let votes = []
-    let posts = []
+      if (req.query.search) {
+        // search in hassles
+        results = []
+        hassles = searchStringInJSON(req.query.search, hassles)
+      }
 
-    const searchStringInJSON = (str, json) => {
-      const string = str.toLowerCase()
-      json.forEach(object => {
 
-        for (var key in object) {
-          if (key === 'title' && object[key].toLowerCase().includes(string)) {
-            posts.push(object)
-            votes.push(readVotes.filter(vote => vote.id === object.id)[0])
-            break
-          }
-          if (key === 'tags' && object[key].toLowerCase().includes(string)) {
-            posts.push(object)
-            votes.push(readVotes.filter(vote => vote.id === object.id)[0])
-            break
-          }
-          if (key === 'options') {
-            const stringifiedOptions = JSON.stringify(object.options).toLowerCase().replace(/ /g, '').replace(/[^\w-]+/g, ',')
-            if (stringifiedOptions.includes(string)) {
-              posts.push(object)
-              votes.push(readVotes.filter(vote => vote.id === object.id)[0])
-              break
+      if (auth && auth != undefined && auth != 'undefined' && auth != 'null' && auth != 'false' && auth != 'true') {
+
+        if (members[auth].banned === true) {
+          response = { "status": 403, members, privacy, stats }
+        } else {
+          if (user && user != auth && user != undefined && user != 'undefined' && user != 'null' && user != 'false' && user != 'true') {
+            if (members[user]) {
+              if (members[user].banned === true) {
+                // user from query is banned
+                response = { "status": 403, members, privacy, stats }
+              } else {
+                // user from query not banned
+                if (privacy[types[req.query.type]] === 1 || (typeof privacy[types[req.query.type]] === 'object' && privacy[types[req.query.type]].includes(auth))) {
+                  // user from query passed all checks and can send content
+                  response = { "status": 200, members, hassles, privacy, stats }
+                } else {
+                  response = { "status": 403, members, privacy, stats }
+                }
+              }
+
+            } else {
+              // not a member
+              response = { "status": 404, members, privacy, stats }
             }
-          }
-          if (key === 'description') {
-            const stringifiedOptions = JSON.stringify(object.description).toLowerCase()
-
-            if (stringifiedOptions.includes(string)) {
-              posts.push(object)
-              votes.push(readVotes.filter(vote => vote.id === object.id)[0])
-              break
-            }
+          } else {
+            // No user query, normal response
+            response = { "status": 200, members, hassles, privacy, stats }
           }
         }
+      } else {
+        // NO AUTH
+        if (req.query.user && user != undefined && user != 'undefined' && user != 'null' && user != 'false' && user != 'true') {
+          if (members[user]) {
+            if (members[user].banned === false) {
+              if (privacy[types[req.query.type]] === 1) {
+                // user hassle is public
+                response = { "status": 200, members, hassles, privacy, stats }
+              } else {
+                // access to this user's hassle is not public
+                response = { "status": 403, members, privacy, stats }
+              }
+            } else {
+              // user is banned
+              response = { "status": 403, members, privacy, stats }
+            }
+          } else {
+            // user from query is not a member
+            response = { "status": 404, members, privacy, stats }
+          }
+        } else {
+          // no user queried, sending public stats and members for homepageg
+          response = { stats, members }
+        }
+      }
 
-      })
-      return posts
+    }
+    else {
+      privacy = [0, 0, 0, 0]
+      response = { "status": err, members, privacy, stats }
     }
 
-    posts = searchStringInJSON(s, readPosts)
-
-    res.send({ posts, votes, members })
-  }
-
-  else {
-    const posts = readPosts
-    const votes = readVotes
-    res.send({ posts, votes, members })
-  }
-
+    res.send(response)
+  })
 })
 
 
-// POST to the posts.json file
-app.post('/post', upload.single("image"), (req, res) => {
+// POST
+app.post('/hassle', (req, res) => {
+  if (!req.body.edit) {
+    // Joi Schema = how the incoming input data is validated
+    const schema = {
+      user: Joi.string().max(23).required(),
+      queryUser: Joi.string().max(23),
+      title: Joi.string().max(124).required(),
+      image: Joi.string().max(999).required(),
+      type: Joi.string().max(23).required()
+    }
 
+    let { error } = Joi.validate(req.body, schema)
 
-  // Joi Schema = how the incoming input data is validated
-  const schema = {
-    user: Joi.string().max(23).required(),
-    title: Joi.string().max(124).required(),
-    duration: Joi.number().integer().min(1).max(30).required(),
-    description: Joi.string().max(10001).required(), // apparently you need to add 1 extra character because it does not match front-end otherwise
-    options: Joi.array().max(1025).required(),
-    tags: Joi.string().max(124).required(),
-    type: Joi.string().max(13).required(),
-    votes: Joi.array().max(1025).required()
-  }
-
-  const { error } = Joi.validate(req.body, schema)
-
-  if (error) {
-    res.status(401).send(error.details[0].message)
-    return
+    if (error) {
+      res.status(401).send(error.details[0].message)
+      return
+    } else {
+      const hassle = new Hassle(req.body)
+      hassle.save()
+      res.send({ "status": 200 })
+    }
   } else {
-    const post = new Post({ ...req.body, ...req.file })
-    post.save()
+    fs.readFile(`./hassle-data/users/${req.body.edit}.json`, (err, fileContent) => {
+      let oldHassles
+      if (!err) {
+        oldHassles = JSON.parse(fileContent)
+      }
 
-    res.send({ "status": 200, "id": 0 })
+      oldHassles.hassles[req.body.type] = req.body.hassles
+      oldHassles.privacy = req.body.privacy
+
+      fs.writeFile(`./hassle-data/users/${req.body.edit}.json`, JSON.stringify(oldHassles), err => {
+        console.log('Error: ' + err)
+      })
+      res.send({ "status": 200 })
+    })
   }
-})
 
-
-app.post('/vote', (req, res) => {
-  // Joi Schema = how the incoming input data is validated
-  const schema = {
-    id: Joi.number().integer().max(23000).precision(0).required(),
-    user: Joi.string().max(13).required(),
-    vote: Joi.number().integer().max(10).precision(0).required()
-  }
-
-  const { error } = Joi.validate(req.body, schema)
-
-  if (error) {
-    res.status(401).send(error.details[0].message)
-    return
-  } else {
-    Vote(req.body)
-    res.send({ "status": 200 })
-  }
 })
 
 
 app.put('/delete', (req, res) => {
+  let userFile = req.body.queryUser || req.body.user
   try {
-    const posts = JSON.parse(fs.readFileSync(`./data/posts.json`))
-    const votes = JSON.parse(fs.readFileSync(`./data/votes.json`))
-    const imageToDelete = posts.filter(post => post.id === parseInt(req.body.id))
-    const filteredPosts = posts.filter(post => post.id !== parseInt(req.body.id))
-    const filteredVotes = votes.filter(vote => vote.id !== parseInt(req.body.id))
+    let oldHassles = JSON.parse(fs.readFileSync(`./hassle-data/users/${userFile}.json`))
+    const filteredHassles = oldHassles.hassles[req.body.type].filter(hassle => hassle.id != Number(req.body.id))
 
-    // delete the image
-    imageToDelete[0].image !== '' ? fs.unlinkSync('public/uploads/' + imageToDelete[0].image) : null
+    oldHassles.hassles[req.body.type] = filteredHassles
 
-    // delete the comments file
-    fs.unlinkSync('./data/comments/#' + req.body.id + '.json')
+    fs.writeFileSync(`./hassle-data/users/${userFile}.json`, JSON.stringify(oldHassles))
 
-
-    fs.writeFileSync(`./data/posts.json`, JSON.stringify(filteredPosts))
-    fs.writeFileSync(`./data/votes.json`, JSON.stringify(filteredVotes))
 
     res.send({ "status": 200 })
   } catch (err) {
@@ -206,68 +200,33 @@ app.put('/delete', (req, res) => {
 })
 
 
-app.get('/userinfo', async (req, res) => {
-  const returnedObject = await userInfo(req.query.user, req.query.login)
-  res.send(returnedObject)
-})
+app.patch('/members', async (req, res) => {
 
+  const object = {}
+  object.user = req.query.user
+  object.queryUser = req.query.queryu
+  object.type = req.query.type
+  object.tx = req.query.tx
+  object.amount = req.query.amount
+  object.currency = req.query.currency
 
-app.post('/comment', (req, res) => {
-  let commentData = {}
-  commentData.id = req.body.commentid
-  commentData.user = req.body.user
-  commentData.text = req.body.comment
-  //Joi Schema = how the incoming input data is validated
   const schema = {
     user: Joi.string().max(23).required(),
-    postid: Joi.number().integer().max(23000).precision(0).required(),
-    commentid: Joi.number().max(23000).precision(0).required(),
-    type: Joi.string().max(10).required(),
-    comment: Joi.string().min(2).max(1001).required()
+    queryUser: Joi.string().max(23),
+    type: Joi.string().max(23),
+    tx: Joi.string().max(69),
+    amount: Joi.number().max(2300001),
+    currency: Joi.string().max(5)
   }
 
-  const { error } = Joi.validate(req.body, schema)
-
-  let commentsFile = []
+  let { error } = Joi.validate(object, schema)
 
   if (error) {
     res.status(401).send(error.details[0].message)
     return
   } else {
-    if (fs.existsSync(`./data/comments/#${req.body.postid}.json`)) {
-      commentsFile = JSON.parse(fs.readFileSync(`./data/comments/#${req.body.postid}.json`))
-    } else { commentsFile = [] }
-
-    let count = 1
-    // Define the recursive function
-    function countKeys(obj) {
-      for (const key in obj) {
-        if (key === "id") {
-          count++;
-        }
-
-        const value = obj[key];
-        if (typeof value === "object") {
-          countKeys(value);
-        }
-      }
-    }
-
-    countKeys(commentsFile)
-
-    commentData.id = count
-
-    if (req.body.type === 'comment') {
-      commentData.replies = []
-      commentsFile.push(commentData)
-    } else {
-      const comment = commentsFile.find(comment => comment.id === req.body.commentid);
-      comment.replies.push(commentData)
-    }
-
-    fs.writeFileSync(`./data/comments/#${req.body.postid}.json`, JSON.stringify(commentsFile))
-
-    res.send({ "status": 200 })
+    const returnedObject = await members(req.query.user, req.query.login, req.query.queryu, req.query.type, req.query.tx, req.query.amount, req.query.currency)
+    res.send(returnedObject)
   }
 })
 

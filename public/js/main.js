@@ -1,37 +1,42 @@
 import { $ } from '/js/selectors.js'
-import { submitPost } from '/js/submit-post.js';
 import { search } from '/js/search.js';
-import { postActions } from '/js/post-actions.js';
-import { addBTN, closeBTN, addOption, removeOption } from '/js/event-listeners.js';
-addBTN(); closeBTN(); addOption(); removeOption();
+import { hassleActions } from '/js/hassle-actions.js';
+import { addBTN, closeBTN } from '/js/event-listeners.js';
+addBTN(); closeBTN();
 
 search(); // search method
-submitPost(); // listener for submit event
 
-// page load - populate all posts
-// Boolean arguments are to call or not call functions inside postActions() - names of sub-functions below:
-// queryURL, clearItems, fetchy, looper, populatePosts, charts, voteBTNlisteners, deleteBTNs, removeLastItem
-const urlString = window.location.search;
-const urlSearch = new URLSearchParams(urlString);
+hassleActions(true, true);
 
-let queryURL = {}
+$('#select-type').addEventListener('change', (e) => {
+    localStorage.setItem('type', $('#select-type input[name="type"]:checked').value)
+    $('#navigation').className = ''
+    $('#search input[type=text]').value = ''
+    hassleActions(true, true)
+})
 
 
-if (urlSearch.get('title') && urlSearch.get('id')) {
-    queryURL.type = 'title';
-    queryURL.id = urlSearch.get('id');
-    queryURL.string = urlSearch.get('title');
-    // generate post page
-    postActions(queryURL, true, true, true, true, true, true, true, false);
-}
-else if (urlSearch.get('tag') !== null) {
-    queryURL.type = 'tag';
-    queryURL.string = urlSearch.get('tag');
-    // generate post page
-    postActions(queryURL, true, true, true, true, true, true, true, false);
-}
+// Timeout for Loader
 
-else {
-    // generate index page
-    postActions('', true, true, true, true, false, false, false, false);
-}
+setTimeout(() => {
+    $('#loader').style.setProperty('display', 'none')
+}, "10000");
+
+
+let script = document.createElement("script");
+script.innerHTML = `
+    window.CustomSubstackWidget = {
+        substackUrl: "gratitudetoken.substack.com",
+        placeholder: "example@gmail.com",
+        buttonText: "Subscribe",
+        theme: "custom",
+        colors: {
+          primary: "#FFFFFF",
+          input: "#000000",
+          email: "#FFFFFF",
+          text: "#000000",
+        }
+      };
+    `;
+script.async = true;
+document.body.append(script);

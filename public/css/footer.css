@@ -1,0 +1,45 @@
+.shareThis {
+    font-size: 23px;
+    margin-top: 32px
+}
+
+
+.shareThis,
+.sharethis-inline-share-buttons {
+    padding: 23px 0;
+}
+
+
+footer {
+    display: flex;
+    justify-content: center;
+    color: var(--footer);
+    position: relative;
+}
+
+copy {
+    padding: 23px 0;
+    text-align: center;
+    font-size: 14px;
+    z-index: 11;
+}
+
+footer strong {
+    font-size: 23px;
+    display: block;
+}
+
+footer a,
+footer a:visited {
+    color: var(--footer-link);
+    margin: 23px 0;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--footer-link-secondary);
+}
+
+footer img {
+    max-height: 32px;
+}

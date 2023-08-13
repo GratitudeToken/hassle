@@ -1,16 +1,12 @@
-import { $, $$ } from '/js/selectors.js';
-import { postActions } from '/js/post-actions.js';
+import { $ } from '/js/selectors.js'
+import { hassleActions } from '/js/hassle-actions.js'
 
-export const search = () => {
+export const search = (string) => {
     $('#search').addEventListener('submit', (event) => {
         event.preventDefault();
-        let queryURL = {}
-        queryURL.type = 'search';
-        queryURL.string = $('#search input[type=text]').value;
-        $('body').classList.remove('postPage')
-        // Boolean arguments are to call or not call functions inside postActions() - names of sub-functions below:
-        // queryURL, clearItems, fetchy, looper, populatePosts, charts, voteBTNlisteners, deleteBTNs, removeLastItem
-        postActions(queryURL, true, true, true, true, false, false, false, false);
+        $('body').classList.remove('hasslePage')
+        hassleActions(true, true, $('#search input[type=text]').value)
         $('.features').style.display = 'none'
+        $('#navigation').classList.add('show', 'flex')
     });
 }

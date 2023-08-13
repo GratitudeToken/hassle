@@ -1,0 +1,25 @@
+/* LOADER */
+
+#loader {
+    align-content: center;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, .69);
+    position: fixed;
+    top: 0;
+    margin: 0 auto;
+    z-index: 10;
+}
+
+#loader:before {
+    display: block;
+    content: '';
+    width: 69px;
+    height: 69px;
+    background: url(/favicon/hassle-favicon.svg) no-repeat;
+    background-size: 69px 69px;
+    animation: loader 2.3s infinite
+}

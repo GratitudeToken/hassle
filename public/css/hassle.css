@@ -1,0 +1,525 @@
+#hassles {
+    width: 100%;
+    min-height: 32vh;
+    text-align: left;
+    display: grid;
+    gap: 10px;
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#hassles.crowdfunded {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.hasslePage #navigation,
+#navigation.show {
+    display: flex;
+    padding: 0 0 10px 0
+}
+
+
+.hassle-closed {
+    opacity: 0.69;
+    -webkit-filter: grayscale(.5);
+    filter: grayscale(0.5);
+}
+
+.hassle-voted .avatar,
+.hassle-closed .avatar {
+    border: 0 none
+}
+
+.hassle {
+    display: inline-block;
+    width: 100%;
+    height: 120px;
+    border-radius: 5px
+}
+
+#hassles.crowdfunded .hassle {
+    height: 240px;
+}
+
+.hassle:hover .main-image {
+    background-size: 200% 200%
+}
+
+.hassle h2 {
+    font-size: 16px;
+    margin: 0 0 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.hasslePage .grid {
+    display: block
+}
+
+.hasslePage .hassle {
+    padding-bottom: 32px;
+    margin-bottom: 0;
+    border: 0;
+}
+
+.hasslePage .hassle:hover {
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.hasslePage .title,
+.hasslePage .title:visited {
+    margin-top: 10px;
+    font-size: 23px
+}
+
+.hasslePage .hassle h2 {
+    font-size: 18px
+}
+
+.main-image {
+    display: block;
+    width: 230px;
+    border-radius: 6px;
+    transition: 0.12s border-radius
+}
+
+.main-image img {
+    border-radius: 6px;
+}
+
+.hasslePage .main-image {
+    width: 230px;
+    position: relative
+}
+
+.main-image .main-image-username {
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    left: 12px
+}
+
+.main-image .user {
+    letter-spacing: 0.5px;
+    color: var(--image-user);
+    text-shadow: 0 0 6px var(--image-user-shadow);
+}
+
+.hassleAvatar {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 51%;
+    position: relative;
+    overflow: hidden;
+    box-sizing: content-box;
+    box-shadow: 0 0 6px var(--image-user-shadow);
+    background: url(/img/love-technology.jpg) no-repeat;
+    background-size: cover;
+}
+
+.hassleAvatar img {
+    width: 32px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hasslePage .main-image img {
+    max-width: 230px;
+}
+
+
+.title,
+.title:visited {
+    display: block;
+    color: var(--second-contrast);
+    text-decoration: none;
+}
+
+.hassle-type {
+    border: 1px solid var(--main-color);
+    margin-right: 6px;
+    border-radius: 3px;
+    display: inline-block;
+    color: var(--main-color);
+    font-size: 14px;
+    padding: 6px 12px;
+    text-transform: uppercase;
+}
+
+.description {
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.description ol {
+    padding: 0 0 0 23px;
+}
+
+.description ol li {
+    margin-bottom: 12px;
+    font-weight: bold;
+    font-size: 14px
+}
+
+.description ol li * {
+    cursor: pointer
+}
+
+.description p {
+    font-size: 14px;
+    padding-right: 10px;
+}
+
+.description ol label {
+    transition: 0.23s color
+}
+
+.user_info {
+    color: var(--gray);
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.user_info strong {
+    margin-left: 5px
+}
+
+.content {
+    text-align: left;
+    position: relative;
+}
+
+.content .title,
+.content .description p {
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+
+.tags {
+    line-height: 1.4;
+    padding: 23px 0;
+    margin: 0 10px 23px 0;
+    border-top: 1px dashed var(--second-contrast-32);
+    border-bottom: 1px dashed var(--second-contrast-32)
+}
+
+.tag {
+    margin: 0 6px 0 0;
+    text-decoration: none;
+    display: inline-block
+}
+
+.tag:hover {
+    text-decoration: underline;
+}
+
+.hassle button {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border: 0;
+}
+
+.hassle .action-button {
+    margin: -4px 0 0 9px
+}
+
+.hassle .delete {
+    background: url(/svgs/trash.svg) no-repeat 50% 50%;
+    background-size: 23px 23px;
+}
+
+.hassle .approve {
+    background: url(/svgs/checked.svg) no-repeat 50% 50%;
+    background-size: 23px 23px;
+}
+
+
+
+.user {
+    font-family: 'Dosis', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin: -4px 4px 0 6px;
+}
+
+#avatar-name {
+    font-family: 'Dosis', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 60px;
+    margin: 0 3px 0 0;
+    display: inline-block;
+}
+
+.time-info {
+    display: inline-block;
+}
+
+.hourglass,
+.calendar {
+    width: 18px;
+    height: 18px;
+    margin: 0 3px 0 12px;
+}
+
+.hourglass {
+    filter: var(--contrast-filter)
+}
+
+.calendar {
+    width: auto;
+    height: 23px;
+}
+
+.voting {
+    position: relative;
+    width: 230px;
+    min-width: 230px;
+    height: 230px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.voting span {
+    position: absolute;
+    bottom: 70px;
+    color: var(--main-color);
+}
+
+.voting input {
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    color: var(--main-contrast);
+    border: 0;
+    cursor: pointer;
+    border-radius: 3px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.voting .flex-column {
+    margin: 0 1px;
+    justify-content: end;
+    position: relative;
+    transition: 0.23s transform
+}
+
+.voting .flex-column:hover {
+    transform: translateY(-3px)
+}
+
+.voting .flex-column span {
+    font-size: 12px
+}
+
+.voting #total-users {
+    position: absolute;
+    top: 44px;
+    color: var(--second-contrast-99)
+}
+
+.voting .back {
+    position: absolute;
+    top: 240px;
+    cursor: pointer
+}
+
+.voting .small-icon {
+    width: 32px;
+    height: 32px;
+}
+
+canvas {
+    cursor: pointer;
+}
+
+.vote-btn {
+    position: absolute;
+    top: 60px;
+    display: inline-block;
+    background: var(--logo);
+    background-size: 64px 64px;
+    background-color: transparent !important;
+    border: 0;
+    color: var(--second-contrast);
+    width: 90px !important;
+    height: 90px !important;
+    border-radius: 51%;
+    font-size: 16px;
+    transition: 0.23s transform;
+    z-index: 1;
+}
+
+.vote-btn:hover {
+    transform: scale(2)
+}
+
+.vote-btn:disabled {
+    animation: voteDisabled 0.44s forwards;
+}
+
+.voted {
+    animation: vote 0.44s forwards;
+}
+
+
+.indexHassle .hassle-type {
+    vertical-align: initial;
+}
+
+.indexHassle user {
+    margin-left: 0
+}
+
+.comments-section {
+    text-align: left;
+    padding: 23px 0;
+    margin-top: 12px;
+    border-top: 1px dashed var(--second-contrast-32)
+}
+
+.Closed .comments-section {
+    display: block
+}
+
+.comments-section form {
+    margin-top: 12px;
+    text-align: right;
+}
+
+.comments-section textarea {
+    width: 100%;
+    resize: vertical;
+    display: block;
+    padding: 6px 12px;
+    border-radius: 5px;
+    min-height: 69px;
+    background: var(--comments-textarea-bg);
+    color: var(--comments-textarea-color)
+}
+
+.submit-comment {
+    text-align: right;
+}
+
+.comments-section input {
+    margin-top: 12px;
+    cursor: pointer
+}
+
+.comments {
+    margin-top: 23px
+}
+
+comment {
+    padding: 10px 12px;
+    border-radius: 5px;
+    margin: 23px 0 0 0;
+    display: block;
+    cursor: url(/svgs/reply.svg) 0 23, pointer;
+    transition: background-color 0.23s
+}
+
+comment:hover {
+    background-color: var(--sub-header-bg)
+}
+
+reply {
+    margin: 6px 0 0 0;
+    display: block;
+}
+
+comment form {
+    padding-left: 23px
+}
+
+comment replies {
+    display: block;
+    padding: 6px 0 0 12px;
+    margin-left: 23px;
+}
+
+comment header {
+    font-size: 16px;
+}
+
+comment avatar {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    border-radius: 51%;
+    margin-right: 6px;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+comment avatar img {
+    width: 32px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+comment p {
+    margin: 0;
+    padding: 6px 0
+}
+
+.comments .typing {
+    position: relative;
+    margin: 12px 23px;
+    height: 23px;
+}
+
+.typing span {
+    content: '';
+    animation: blink 1.5s infinite;
+    animation-fill-mode: both;
+    height: 10px;
+    width: 10px;
+    background: var(--ink-blue);
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 50%;
+}
+
+.typing span:nth-of-type(2) {
+    animation-delay: .2s;
+    margin-left: 15px;
+}
+
+.typing span:nth-of-type(3) {
+    animation-delay: .4s;
+    margin-left: 30px;
+}
+
+@keyframes blink {
+    0% {
+        opacity: .1;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: .1;
+    }
+}

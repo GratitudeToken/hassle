@@ -1,62 +1,24 @@
-import { $, $$ } from '/js/selectors.js';
+import { $ } from '/js/selectors.js';
+import { renderImageResults } from '/js/render-image-results.js'
 
 export const addBTN = () => {
     $('#add').addEventListener('click', (event) => {
-        $('#post-form-container').style.display = 'flex';
+        $('#hassle-form-container').style.display = 'flex';
+        $('#hassles').style.filter = 'blur(3px)'
         $('#close').style.display = 'block';
-        $('body').style.overflow = 'hidden';
     });
+    renderImageResults()
 }
 
 export const closeBTN = () => {
     $('#close').addEventListener('click', (event) => {
-        $('#post-form-container').style.display = 'none';
-        $('body').style.overflow = '';
+        $('#hassle-form-container').style.display = 'none';
+        $('#hassles').style.filter = 'none'
     });
     document.addEventListener('keydown', evt => {
         if (evt.key === 'Escape') {
-            $('#post-form-container').style.display = 'none';
-            $('body').style.overflow = '';
+            $('#hassle-form-container').style.display = 'none';
+            $('#hassles').style.filter = 'none'
         }
     });
-}
-
-export const addOption = () => {
-    $('#add_option') ? $('#add_option').addEventListener('click', (event) => {
-        event.preventDefault();
-        let placeholder = 'Option'
-
-        if ($$('.voteInput').length < 23) {
-
-            // Create the new input element
-            const newInputElement = document.createElement('input');
-
-            // Set the attributes for the new input element
-            newInputElement.setAttribute('class', 'voteInput');
-            newInputElement.setAttribute('type', 'text');
-            newInputElement.setAttribute('maxlength', '96');
-            newInputElement.setAttribute('placeholder', placeholder)
-            newInputElement.required = true;
-
-            $('.options').appendChild(newInputElement);
-            $('#remove_option').style = 'display: inline-block !important';
-
-            $$('.voteInput').forEach((el) => {
-                el.setAttribute('placeholder', placeholder)
-            })
-        } else { alert('Maximum number of options is 23.') }
-    }) : null;
-}
-
-export const removeOption = () => {
-    $('#remove_option') ? $('#remove_option').addEventListener('click', (event) => {
-        event.preventDefault();
-        if ($$('.voteInput').length === 3) {
-            $('.voteInput:last-of-type').remove();
-            event.target.style = 'display: none !important';
-        }
-        if ($$('.voteInput').length > 2) {
-            $('.voteInput:last-of-type').remove();
-        }
-    }) : null;
 }

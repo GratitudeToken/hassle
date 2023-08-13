@@ -1,0 +1,460 @@
+.indexPost,
+.indexPost:visited {
+    text-decoration: none;
+    position: relative;
+    display: block;
+    height: 120px;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#hassles.crowdfunded .indexPost {
+    height: 400px;
+}
+
+.actions button {
+    overflow: hidden;
+    position: relative
+}
+
+.actions button b {
+    pointer-events: none;
+}
+
+.actions .delete-btn,
+.actions .price-btn {
+    transform: translateY(-400px);
+    transition: all 0.23s
+}
+
+.actions .units-btn {
+    transform: translateY(200px);
+    transition: all 0.23s;
+    font-size: 42px !important;
+    display: block
+}
+
+.actions .units-btn b {
+    transition: all 0.11s
+}
+
+.actions .price-btn,
+.actions .units-btn {
+    font-size: 32px;
+    font-weight: bold;
+    font-family: 'Dosis', Arial, Helvetica, sans-serif;
+}
+
+.actions .price-btn,
+.actions .units-btn {
+    line-height: 40px;
+}
+
+.actions .units-btn:hover {
+    background: var(--main-color);
+}
+
+.actions .units-btn.minus-btn b {
+    margin-top: -5px
+}
+
+
+.indexPost:hover .actions button {
+    transform: translateY(0);
+}
+
+.indexPost:hover .actions button:hover {
+    background: #ffffff
+}
+
+.indexPost:hover .actions button img {
+    transition: all 0.11s
+}
+
+.indexPost:hover .units-btn:hover img {
+    transition: all 0.23s
+}
+
+.indexPost:hover .actions button:hover img {
+    width: 32px;
+    height: 32px;
+}
+
+.indexPost:hover .plus-btn:hover {
+    transform: rotate(180deg);
+}
+
+.indexPost:hover .minus-btn:hover b {
+    padding-right: 2px;
+    transform: scale(2, 1);
+}
+
+
+.actions .price-btn * {
+    transition: all 0.11s
+}
+
+.actions .price-btn i {
+    position: absolute;
+    content: '';
+    background: #000000;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    position: absolute;
+    right: 23px;
+    top: -15px
+}
+
+.actions .price-btn:hover b {
+    transform: rotate(32deg);
+    margin: 0 0 -8px -4px
+}
+
+.actions .price-btn:hover i {
+    top: 5px;
+    right: 9px
+}
+
+
+.indexPost .avatar {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    box-sizing: content-box;
+    background: url(/img/love-technology.jpg) no-repeat;
+    background-size: cover;
+    border-radius: 32px;
+}
+
+.indexPost .avatar img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 32px;
+}
+
+.indexPost .title {
+    width: 100%;
+    height: 40px;
+    padding-top: 18px;
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    font-weight: bold;
+    background: #23232350;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.69) 0%, rgba(0, 0, 0, 0) 100%);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    z-index: 1;
+    text-shadow: 0 0 3px #000000;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+.indexPost .units {
+    font-weight: normal;
+}
+
+.indexPost .title h2 {
+    color: var(--white);
+}
+
+.indexPost .price {
+    display: inline-block;
+    padding: 0 6px;
+    min-width: 23px;
+    width: auto;
+    height: 23px;
+    line-height: 23px;
+    background: rgba(0, 0, 0, 0.69);
+    color: var(--white);
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 23px;
+    border-top-right-radius: 0;
+    text-align: center;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.indexPost .price:hover {
+    background: #232323
+}
+
+.indexPost .price:hover:before,
+.removeTokenLogo:before {
+    content: '$'
+}
+
+.indexPost .price:hover img,
+.removeTokenLogo img {
+    display: none
+}
+
+.indexPost .price img {
+    vertical-align: sub;
+    margin-top: 3px;
+}
+
+.indexPost .price input[type=number] {
+    background: none;
+    border: 0;
+    color: var(--white);
+    display: none;
+    outline: none;
+    width: 40px;
+    padding-left: 12px;
+    margin-top: 3px;
+    font-weight: bold;
+    border-radius: 3px;
+    border-bottom-right-radius: 10px;
+}
+
+.indexPost .price:hover input[type=number] {
+    display: inline-block;
+    background: #444444;
+    width: 100px;
+}
+
+.indexPost .price:hover b {
+    display: none
+}
+
+.indexPost .price input[type=number]::-webkit-outer-spin-button,
+.indexPost .price input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.indexPost .price input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.indexPost .main-image {
+    display: block;
+    width: 100%;
+    min-height: 120px;
+    overflow: hidden;
+    position: relative;
+    background: url(/img/love-technology.jpg) no-repeat 50% 50%;
+    background-size: cover;
+    box-shadow: inset 0 0 10px var(--second-contrast-32);
+}
+
+#hassles.crowdfunded .main-image {
+    min-height: 400px;
+}
+
+.indexPost .main-image img {
+    width: 64px;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.indexPost .actions {
+    display: none;
+    width: 100%;
+    height: 120px;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    pointer-events: none;
+}
+
+.indexPost .actions button {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    border-radius: 51%;
+    margin: 0 5px;
+    background: rgba(255, 255, 255, 0.77);
+    pointer-events: all;
+}
+
+.canEdit .indexPost .actions {
+    display: flex;
+}
+
+
+.canEdit .indexPost input {
+    pointer-events: all;
+}
+
+.The2WaySlider {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    visibility: hidden;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.The2WaySlider:hover,
+.The2WaySlider:hover i {
+    border-color: black
+}
+
+.The2WaySlider:active+.price img {
+    display: none
+}
+
+.The2WaySlider:active+.price:before {
+    content: '$'
+}
+
+.The2WaySlider:active b,
+.The2WaySlider:active :after {
+    display: none
+}
+
+.The2WaySlider:active img {
+    display: block
+}
+
+.The2WaySlider b {
+    color: var(--second-contrast);
+    font-weight: 900;
+    font-style: normal;
+    font-family: 'Dosis', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 3px;
+}
+
+.The2WaySlider i {
+    display: block;
+    position: absolute;
+    resize: both;
+    width: 60px;
+    height: 36px;
+    min-width: 60px;
+    max-width: calc(100% - 30px);
+    min-height: 36px;
+    max-height: 120px;
+    overflow: hidden;
+    border: 1px solid transparent;
+    box-shadow: 0 0 15px black;
+    background: var(--main-contrast);
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#hassles.crowdfunded .The2WaySlider i {
+    max-height: 400px;
+}
+
+.The2WaySlider i:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 16px 16px;
+    border-color: transparent transparent var(--main-color) transparent;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    animation: corner-resize 1s infinite cubic-bezier(0.075, 0.82, 0.165, 1)
+}
+
+.The2WaySlider img {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.user-cards {
+    grid-template-columns: repeat(6, 1fr) !important;
+}
+
+.user-card,
+.user-card:visited {
+    height: 144px;
+    background: var(--second-contrast-23);
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 0 5px #000000;
+}
+
+.white-gradient {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: linear-gradient(5deg, rgba(0, 0, 0, .6) 0%, rgba(0, 0, 0, 0) 32%);
+}
+
+.statz {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    padding-bottom: 10px
+}
+
+.user-cards h1 {
+    text-align: right;
+    padding-right: 10px;
+    font-weight: normal;
+}
+
+.user-cards h1 b {
+    font-size: 32px;
+}
+
+.user-card h3 {
+    font-size: 16px;
+    padding: 10px 10px 5px 10px;
+}
+
+.user-card .avatar {
+    width: 100%;
+    height: 144px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.user-card .avatar img {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    margin: 0 auto;
+    border-radius: 5px;
+    transition: 0.23s all
+}
+
+.user-card:hover .avatar img {
+    transform: scale(1.23)
+}
+
+.type-svg {
+    width: 10px;
+    height: 10px;
+    margin-left: 10px;
+    filter: invert(1)
+}
