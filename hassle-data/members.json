@@ -1,10 +1,23 @@
 {
     "lucianape3": {
         "kyc": false,
-        "banned": false
+        "banned": false,
+        "funding": [
+            {
+                "user": "fatzuca",
+                "type": "crowdfunded",
+                "tx": "d3df6904ddf30e9d98b2a1103d823fc2bad3b782295830c2aa76dbc25dd47843",
+                "amount": "1.00000000",
+                "currency": "GRAT"
+            }
+        ]
     },
     "gratitude": {
         "kyc": false,
+        "banned": false
+    },
+    "fatzuca": {
+        "kyc": true,
         "banned": false
     }
 }

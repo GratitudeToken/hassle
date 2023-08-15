@@ -1,5 +1,7 @@
 const path = require('path')
 const express = require('express')
+const https = require('https')
+const cors = require('cors')
 const Joi = require('joi')
 const fs = require('fs')
 const google = require('googlethis')
@@ -8,12 +10,18 @@ const { members } = require('./methods/component')
 
 
 const app = express()
-
-
-// express.json to decifer json data from incoming requests
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, 'public_html')))
+//app.use(express.static(path.join(__dirname, 'shield')))
+app.use(cors());
+
+https.createServer({
+  key: fs.readFileSync("server.key"),
+  cert: fs.readFileSync("server.crt"),
+}, app)
+  .listen(65535, () => {
+    console.log("Server is running at port 65535");
+  });
 
 // google image search
 app.get('/images', async (req, res) => {
@@ -229,5 +237,3 @@ app.patch('/members', async (req, res) => {
     res.send(returnedObject)
   }
 })
-
-app.listen(9632)

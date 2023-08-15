@@ -1,0 +1,40 @@
+.features {
+    color: var(--second-contrast-99);
+    border-radius: 6px;
+    position: relative;
+    padding: 32px 0;
+}
+
+.features h1 {
+    padding: 15px 10px 0 10px;
+    color: var(--features-b)
+}
+
+.features .grid-3 {
+    display: grid;
+    gap: 0;
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    line-height: 1.4;
+}
+
+.features .grid-3 div {
+    padding: 23px 12px 12px 12px
+}
+
+.features .grid-3 img {
+    width: 55px;
+    height: 55px;
+    display: block;
+    margin: 0 auto
+}
+
+.features b {
+    font-size: 14px;
+    color: var(--features-b)
+}
+
+.features p {
+    color: var(--gray69);
+    padding: 23px 10px
+}
