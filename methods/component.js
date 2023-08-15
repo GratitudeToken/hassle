@@ -72,19 +72,20 @@ module.exports = class Hassle {
 
 module.exports.members = async function (user, authenticating, queryu, type, tx, amount, currency) {
   //console.log(user, authenticating, queryu, tx, amount, currency)
-  let validatedUser
   let validatedUserQuery
 
-  if (user != undefined && user != queryu && user != 'undefined' && user != 'null' && user != 'false' && user != 'true') {
-    validatedUser = user
-  }
-
-  if (queryu != undefined && queryu != user && queryu != 'undefined' && queryu != 'null' && queryu != 'false' && queryu != 'true') {
+  if (queryu !== undefined && queryu !== user && queryu !== 'undefined' && queryu !== 'null' && queryu !== 'false' && queryu !== 'true') {
     validatedUserQuery = queryu
   }
 
   // read members file
   const members = JSON.parse(fs.readFileSync(`./hassle-data/members.json`)) || {}
+  let stats = JSON.parse(fs.readFileSync(`./hassle-data/stats.json`))
+
+  if (user && authenticating && !stats[user]) {
+    stats[user] = [0, 0, 0, 0]
+    fs.writeFileSync(`./hassle-data/stats.json`, JSON.stringify(stats))
+  }
 
   // let's check if the user is verified and has the minimum token balance required and send back the response
   const { rows } = await protonApi.rpc.get_table_rows({
@@ -125,18 +126,12 @@ module.exports.members = async function (user, authenticating, queryu, type, tx,
 
 
   if (!members || !members[user]) {
-
-    if (validatedUser) {
-
-      const newUserFile = { "privacy": [0, 0, 0, 0], "hassles": { "weekly": [], "monthly": [], "wishlist": [], "crowdfunded": [] } }
-      fs.writeFileSync(`./hassle-data/users/${user}.json`, JSON.stringify(newUserFile))
-
-      members[user] = {
-        "kyc": kyc,
-        "banned": false
-      }
-      fs.writeFileSync(`./hassle-data/members.json`, JSON.stringify(members))
+    members[user] = {
+      "kyc": false,
+      "banned": false
     }
+
+    fs.writeFileSync(`./hassle-data/members.json`, JSON.stringify(members))
   } else {
     if (tx) {
       if (!members[validatedUserQuery].funding) {
@@ -169,7 +164,7 @@ module.exports.members = async function (user, authenticating, queryu, type, tx,
       const avatarPromise = new Promise((resolve, reject) => {
         sharp(imgBuffer)
           .resize(320)
-          .toFile(`./public_html/avatars/${validatedUser}.webp`, (err, info) => {
+          .toFile(`./public_html/avatars/${user}.webp`, (err, info) => {
             if (err) {
               reject(err)
               console.log('Error saving avatar: ' + err)

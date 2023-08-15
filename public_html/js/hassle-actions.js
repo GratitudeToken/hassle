@@ -308,9 +308,12 @@ export const hassleActions = (fetchy, looper, search) => {
 
                     let queryText = $('.query-text')
                     let finalQuery
+                    $('#hassle').disabled = false
                     if (query.s) {
                         finalQuery = query.s
                         queryText.innerHTML = `<b>${finalQuery}</b> - returned ${userData.hassles.length} results.`
+                        $('.indexPost').style = 'pointer-events: none !important'
+                        $('#hassle').disabled = true
                     }
 
                     userData.hassles.length == 0 ? queryText.innerHTML = `🔍 No hits for <b>${finalQuery}</b> in <b style="text-transform: capitalize">${type}</b> 🤷‍♂️` : null

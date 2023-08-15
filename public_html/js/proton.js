@@ -124,6 +124,7 @@ const averageRatesSortFunction = (array, symbol) => {
 }
 
 const transferPayload = (type, contract, amount, decimals, symbol) => {
+
     transfer(contract, query.u, amount, decimals, symbol)
         .then(resp => {
             console.log(resp)
@@ -134,10 +135,9 @@ const transferPayload = (type, contract, amount, decimals, symbol) => {
                 return response.json()
             }).then(data => {
                 confetti()
-                //console.log(url + `members?user=${query.u}&login=false&queryu=${query.u}&type=${type}&tx=${resp.processed.id}&amount=${$('#total input[type=number]').value}&currency=${symbol}`)
                 setTimeout(() => {
                     $('#confetti').style.opacity = 0
-                }, "40000", () => {
+                }, "35000", () => {
                     setTimeout(() => {
                         $('#confetti').remove()
                     }, "3000")
@@ -159,8 +159,11 @@ export const userInfo = (user, authenticating) => {
         members = data.members
         averageRates = data.averageRates
         accountTokens = data.accountTokens
-
+        let selectedToken = JSON.parse(localStorage.getItem('selectedToken'))
+        selectedToken = Object.keys(selectedToken)[0]
         localStorage.setItem('accountTokens', JSON.stringify(accountTokens))
+        let tokenRate
+        let symbol
         //let gratBalance = members[user].balance.filter(grat => grat.currency === 'GRAT')
         // gratBalance = gratBalance[0].amount.toFixed(2)
         // if (gratBalance >= minBalance && members[user].kyc === true) {
@@ -177,38 +180,27 @@ export const userInfo = (user, authenticating) => {
             $('body').classList.add('authenticated')
             $('#user-menu .avatar').src = `/avatars/${user}.webp`
 
-            // default selected token
-
-            // if (!localStorage.getItem('selectedToken')) {
-            //     localStorage.setItem('selectedToken', '{"XUSDT": 1}')
-            // }
-            let selectedToken = JSON.parse(localStorage.getItem('selectedToken'))
-            selectedToken = Object.keys(selectedToken)[0]
-
-
-            let tokenRate
-            let symbol
-
-            if (!localStorage.getItem('selectedToken')) {
-                localStorage.setItem('selectedToken', '{"XUSDT": 1}')
-                tokenRate = { "XUSDT": 1 }
-                symbol = 'XUSDT'
-            } else {
-                tokenRate = JSON.parse(localStorage.getItem('selectedToken'))
-                symbol = Object.keys(tokenRate)[0]
-            }
-
-            let transferAccount
-            let contract
-            let decimals
-
-
-            transferAccount = accountTokens.filter(item => item.currency == symbol || item.currency == 'XUSDT' || item.currency == 'XPR' || item.currency == 'GRAT')
-            contract = transferAccount[0].contract
-            decimals = transferAccount[0].decimals
-
 
             $('#hassle').addEventListener("click", e => {
+
+                selectedToken = Object.keys(selectedToken)[0]
+
+                if (!localStorage.getItem('selectedToken')) {
+                    localStorage.setItem('selectedToken', '{"XUSDT": 1}')
+                    tokenRate = { "XUSDT": 1 }
+                    symbol = 'XUSDT'
+                } else {
+                    tokenRate = JSON.parse(localStorage.getItem('selectedToken'))
+                    symbol = Object.keys(tokenRate)[0]
+                }
+
+                let transferAccount
+                let contract
+                let decimals
+
+                transferAccount = accountTokens.filter(item => item.currency === symbol)
+                contract = transferAccount[0].contract
+                decimals = transferAccount[0].decimals
                 if ((!$('.update-it') && $('#total input').value)) {
                     e.srcElement.disabled = true
                     e.srcElement.className = 'updated'
@@ -287,7 +279,7 @@ export const login = async (restoreSession) => {
     session = localSession
 
     if (localSession) {
-        user = localSession.auth.actor
+        user = localSession.auth.actor || ''
         avatarName.textContent = user
         $('#add').style.display = 'flex'
         $('#menu-options').classList.add('authenticated')

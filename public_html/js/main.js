@@ -10,7 +10,7 @@ hassleActions(true, true);
 
 const headings = ['Weekly shopping list', 'Monthly shopping list', 'Wishlist', 'Crowdfunded list']
 $('#mainHeading').textContent = headings[types[localStorage.getItem('type') || 'weekly']]
-
+localStorage.getItem('type') === 'crowdfunded' ? $('#hassle-form input[type=text]').setAttribute('placeholder', 'Image URL (Eg: "https://hassle.app/profile.png")') : null
 
 $('#select-type').addEventListener('change', (e) => {
     const type = $('#select-type input[name="type"]:checked').value
@@ -20,6 +20,7 @@ $('#select-type').addEventListener('change', (e) => {
     $('#hassles').innerHTML = ''
     $('#navigation').className = ''
     $('#search input[type=text]').value = ''
+    type === 'crowdfunded' ? $('#hassle-form input[type=text]').setAttribute('placeholder', 'Image URL (Eg: "https://hassle.app/profile.png")') : null
     hassleActions(true, true)
 })
 

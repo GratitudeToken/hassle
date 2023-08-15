@@ -3,9 +3,10 @@ export class userCards {
         let allData = data
 
         let theHTML = '<h2><b>Latest</b><br>members</h2>'
-
+        console.log(data)
         //Iterate through each property (user) in the object
         for (const user in allData.members) {
+
             let userStats = ''
             if (allData.members[user].banned === false) {
                 if (allData.members.hasOwnProperty(user)) {

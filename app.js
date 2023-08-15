@@ -36,6 +36,12 @@ app.get('/gethassles', (req, res) => {
   const stats = JSON.parse(fs.readFileSync(`./hassle-data/stats.json`))
   const members = JSON.parse(fs.readFileSync(`./hassle-data/members.json`))
 
+  if (auth != 'undefined' && (!members || !members[auth])) {
+
+    const newUserFile = { "privacy": [0, 0, 0, 0], "hassles": { "weekly": [], "monthly": [], "wishlist": [], "crowdfunded": [] } }
+
+    fs.writeFileSync(`./hassle-data/users/${auth}.json`, JSON.stringify(newUserFile))
+  }
 
   //search function
   const searchStringInJSON = (str, json) => {

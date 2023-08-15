@@ -5,7 +5,7 @@ import { queryParams } from '/js/queries.js'
 import { submitHassle } from '/js/submit-hassle.js'
 
 export const renderImageResults = (data) => {
-
+    const type = localStorage.getItem('type')
     const query = queryParams()
 
     const inputElement = $('#title')
@@ -33,10 +33,10 @@ export const renderImageResults = (data) => {
     function fetchImages(event) {
         // let's check if user has inputed a URL first
         const userInput = inputElement.value
-        if (userInput.indexOf("http://") === 0 || userInput.indexOf("https://") === 0) {
+        if (type === 'crowdfunded' && (userInput.indexOf("http://") === 0 || userInput.indexOf("https://") === 0)) {
             $('#image-results').style.display = 'block'
             $('#image-results').innerHTML = `<img style="width: 100%; border-radius: 5px; cursor: pointer" src="${userInput}"/>`
-            submitHassle(query.u, localStorage.getItem('type')) // listener for submit event
+            submitHassle(query.u, type) // listener for submit event
         } else {
             if (event.target.value.length > 2) {
                 $('#image-results').style.display = ''
@@ -66,7 +66,7 @@ export const renderImageResults = (data) => {
             } else {
                 $('#image-results').innerHTML = `<span><img class="small-icon invert2" title="Private"
                                     src="/svgs/photo.svg" style="margin-right: 5px; vertical-align: sub" />
-                                Image results will be shown here. Chooose one.</span>`
+                                Image results will be shown here. Choose one.</span>`
             }
         }
     }

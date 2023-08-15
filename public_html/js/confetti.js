@@ -1,3 +1,4 @@
+import { $ } from '/js/selectors.js'
 export const confetti = () => {
     const snd = $("#cheers")
     snd.play()
