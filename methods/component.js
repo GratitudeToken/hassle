@@ -59,10 +59,7 @@ module.exports = class Hassle {
         console.log('Error: ' + err)
         // read stats file
         const stats = JSON.parse(fs.readFileSync(`./hassle-data/stats.json`)) || {}
-        stats[userFile][0] = oldHassles.hassles.weekly.length
-        stats[userFile][1] = oldHassles.hassles.monthly.length
-        stats[userFile][2] = oldHassles.hassles.wishlist.length
-        stats[userFile][3] = oldHassles.hassles.crowdfunded.length
+        stats[userFile] = [oldHassles.hassles.weekly.length, oldHassles.hassles.monthly.length, oldHassles.hassles.wishlist.length, oldHassles.hassles.crowdfunded.length]
         fs.writeFileSync(`./hassle-data/stats.json`, JSON.stringify(stats))
       })
     })
@@ -74,18 +71,12 @@ module.exports.members = async function (user, authenticating, queryu, type, tx,
   //console.log(user, authenticating, queryu, tx, amount, currency)
   let validatedUserQuery
 
-  if (queryu !== undefined && queryu !== user && queryu !== 'undefined' && queryu !== 'null' && queryu !== 'false' && queryu !== 'true') {
+  if (queryu !== user && queryu !== 'undefined') {
     validatedUserQuery = queryu
   }
 
   // read members file
   const members = JSON.parse(fs.readFileSync(`./hassle-data/members.json`)) || {}
-  let stats = JSON.parse(fs.readFileSync(`./hassle-data/stats.json`))
-
-  if (user && authenticating && !stats[user]) {
-    stats[user] = [0, 0, 0, 0]
-    fs.writeFileSync(`./hassle-data/stats.json`, JSON.stringify(stats))
-  }
 
   // let's check if the user is verified and has the minimum token balance required and send back the response
   const { rows } = await protonApi.rpc.get_table_rows({
@@ -125,14 +116,7 @@ module.exports.members = async function (user, authenticating, queryu, type, tx,
   })
 
 
-  if (!members || !members[user]) {
-    members[user] = {
-      "kyc": false,
-      "banned": false
-    }
-
-    fs.writeFileSync(`./hassle-data/members.json`, JSON.stringify(members))
-  } else {
+  if (members[user]) {
     if (tx) {
       if (!members[validatedUserQuery].funding) {
         members[validatedUserQuery].funding = []

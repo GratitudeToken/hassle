@@ -1,7 +1,7 @@
 {
   "name": "hassle",
   "version": "1.0.0",
-  "description": "Hassle is a Web 3 household shopping list with WebAuth authentication.",
+  "description": "hassle.app is a Web 3 list manager with WebAuth authentication.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

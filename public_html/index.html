@@ -149,7 +149,7 @@
                     <form id="add-remove">
                         <i></i>
                         <div>
-                            <input type="text" placeholder="± user (min 4 chars)" />
+                            <input type="text" placeholder="± user" />
                             <button type="submit"></button>
                         </div>
                     </form>
@@ -204,7 +204,7 @@
                     <img id="close" src="/svgs/close.svg" alt="close icon" />
                     <form id="hassle-form">
                         <input type="text" name="title" id="title" maxlength="123"
-                            placeholder="🔎 Enter product name ..." required>
+                            placeholder="🔎 Enter any product name ..." required>
                         <button type="submit">🔍</button>
                         <div id="image-results"><span><img class="small-icon invert2" title="Private"
                                     src="/svgs/photo.svg" style="margin-right: 5px; vertical-align: sub" />
@@ -218,7 +218,7 @@
                 <div class="features">
                     <img id="close-features" src="/svgs/close.svg" alt="close icon" />
                     <img style="width: 230px" title="hassle" alt="hassle" src="/svgs/hassle-logo.svg" />
-                    <h1 style="font-size: 12px;"><i>A Web 3 hassle list with WebAuth authentication.</i>
+                    <h1 style="font-size: 12px;"><i>Web 3 lists with WebAuth authentication.</i>
                     </h1>
                     <div style="padding-top: 0 !important; font-size: 16px">
                         <p>Some people use it for shopping lists and
@@ -242,17 +242,14 @@
                         <div><img src="/svgs/crowd-fund.svg"
                                 alt="Crowd-fund your hassle list" /><b>Crowdfund!</b><br><i>Any user can fund your
                                 hassle</i></div>
-                    </div><br><br>
-                    <button class="login button"><img class="small-icon invert2" alt="Connect wallet - Unlocked"
-                            src="/svgs/qr.svg" />
-                        Connect
-                        wallet</button>
+                    </div>
                     <p class="notification"><b style="color: green"><img class="medium-icon"
                                 style="margin: -2px 6px 0 0" src="/svgs/exclamation.svg"
                                 alt="Info Announcement Notification" />Alpha public test.</b>
                     </p>
                 </div>
-                <h1 id="mainHeading"></h1>
+                <h1 id="mainHeading"><span></span> <button class="login button"><img class="small-icon invert2"
+                            alt="Connect wallet - Unlocked" src="/svgs/qr.svg" />Connect wallet</button></h1>
                 <div id="hassles"></div>
                 <div id="rollin"></div>
                 <div id="user-cards"></div>
@@ -290,9 +287,8 @@
         <source src="/sounds/cheers.mp3" type="audio/mpeg">
     </audio>
 
-    <script src="https://unpkg.com/@proton/web-sdk@4.2.8"></script>
+    <script src="https://unpkg.com/@proton/web-sdk@4.2.15"></script>
     <script type="module" src="/js/proton.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="/js/main.js"></script>
     <script
         src="https://platform-api.sharethis.com/js/sharethis.js#property=6220b91b94b169001b48536f&product=inline-share-buttons"></script>

@@ -66,13 +66,15 @@ export const submitHassle = (userQuery, type) => {
 
     $('#hassle-form').addEventListener('submit', (event) => {
         event.preventDefault()
-        $('#hassles').style.filter = 'none'
+        $('#hassle-form-container').classList.remove('flex-it')
+        $('#hassles').classList.remove('blur-it')
         submit($('#result-0 img').src)
     })
 
     $$('#image-results img').forEach((el, i) => {
         el.addEventListener('click', (e) => {
-            $('#hassles').style.filter = 'none'
+            $('#hassle-form-container').classList.remove('flex-it')
+            $('#hassles').classList.remove('blur-it')
             submit(el.src)
         })
     })

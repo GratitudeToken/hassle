@@ -1,5 +1,7 @@
 import { $ } from '/js/selectors.js'
+import { user } from '/js/proton.js'
 import { search } from '/js/search.js';
+import { queryParams } from '/js/queries.js'
 import { hassleActions, types } from '/js/hassle-actions.js';
 import { addBTN, closeBTN } from '/js/event-listeners.js';
 addBTN(); closeBTN();
@@ -8,15 +10,59 @@ search(); // search method
 
 hassleActions(true, true);
 
-const headings = ['Weekly shopping list', 'Monthly shopping list', 'Wishlist', 'Crowdfunded list']
-$('#mainHeading').textContent = headings[types[localStorage.getItem('type') || 'weekly']]
-localStorage.getItem('type') === 'crowdfunded' ? $('#hassle-form input[type=text]').setAttribute('placeholder', 'Image URL (Eg: "https://hassle.app/profile.png")') : null
+let query = queryParams()
+
+let type = localStorage.getItem('type')
+
+$('#close-features').addEventListener("click", e => {
+    localStorage.setItem('features', 'hidden')
+    $('.features').style.display = 'none'
+})
+
+let features = localStorage.getItem('features')
+
+if (features === 'hidden') {
+    $('.features').style.display = 'none'
+} else {
+    $('.features').style.display = 'block'
+}
+
+const headings = ['weekly shopping list', 'monthly shopping list', 'wishlist', 'crowdfunded list']
+
+const headingRender = (queryU) => {
+    if (queryU) {
+        $('#mainHeading span').innerHTML = `<b>@${queryU}'s ` + headings[types[localStorage.getItem('type') || 'weekly']]
+    } else {
+        if (user) {
+            $('#mainHeading span').innerHTML = `Your ` + headings[types[localStorage.getItem('type') || 'weekly']]
+        } else {
+            $('#mainHeading span').innerHTML = `You are not connected`
+            $('#mainHeading button').style.display = 'inline-block'
+        }
+    }
+}
+
+headingRender(query.u)
+
+
+const setSearchPlaceholder = (type) => {
+    let placeholder
+    type === 'crowdfunded' ? placeholder = 'Image URL (Eg: "https://hassle.app/profile.png")' : placeholder = '🔎 Enter any product name ...'
+    $('#hassle-form input[type=text]').setAttribute('placeholder', placeholder)
+}
+setSearchPlaceholder(type)
 
 $('#select-type').addEventListener('change', (e) => {
+    if (features === 'hidden') {
+        $('.features').style.display = 'none'
+    }
     const type = $('#select-type input[name="type"]:checked').value
     localStorage.setItem('type', type)
-    $('#mainHeading').textContent = headings[types[type]]
-    $('#mainHeading').innerHTML = headings[types[type]]
+
+    setSearchPlaceholder(type)
+
+    headingRender(query.u)
+
     $('#hassles').innerHTML = ''
     $('#navigation').className = ''
     $('#search input[type=text]').value = ''

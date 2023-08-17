@@ -27,11 +27,11 @@ const PROTON_MAINNET_EPS = [
     // "https://proton.eosusa.news",
     // "https://sbp.proton.cryptolions.io",
     // "https://hyperion.quantumblok.com",
-    // "https://proton.protonuk.io",
+    "https://proton.protonuk.io",
     // "https://proton.eoscafeblock.com",
     // "https://bp1.protonmt.com",
     // "https://proton.eu.eosamsterdam.net",
-    "https://proton.greymass.com"
+    //"https://proton.greymass.com"
     // "https://proton.eosphere.io",
     // "https://proton.genereos.io",
     // "https://api.proton.alohaeos.com",
@@ -130,7 +130,7 @@ const transferPayload = (type, contract, amount, decimals, symbol) => {
             console.log(resp)
 
             fetch(url + `members?user=${user}&login=false&queryu=${query.u}&type=${type}&tx=${resp.processed.id}&amount=${$('#total input[type=number]').value}&currency=${symbol}`, {
-                method: "PATCH"
+                method: "GET"
             }).then(response => {
                 return response.json()
             }).then(data => {
@@ -151,7 +151,7 @@ const transferPayload = (type, contract, amount, decimals, symbol) => {
 export const userInfo = (user, authenticating) => {
 
     fetch(url + 'members?user=' + user + '&login=' + authenticating, {
-        method: "PATCH"
+        method: "GET"
     }).then(response => {
         return response.json()
     }).then(data => {

@@ -32,7 +32,6 @@ body p {
 }
 
 #transferFormContainer,
-#close,
 audio,
 .features,
 .easyNav a,
@@ -53,7 +52,8 @@ body #hassle,
 .userQuery.authenticated #add-remove,
 .authenticated #privacy,
 .authenticated #add-remove,
-.tip {
+.tip,
+#mainHeading button {
     display: none
 }
 

@@ -12,13 +12,6 @@ export const types = { "weekly": 0, "monthly": 1, "wishlist": 2, "crowdfunded": 
 const typesKeys = Object.keys(types)
 const typesSVG = ["lightning", "calendar-simpler", "magic-wand", "crowd-fund-simpler"]
 
-let features = localStorage.getItem('features') || null
-
-$('#close-features').addEventListener("click", e => {
-    localStorage.setItem('features', 'hidden')
-    $('.features').style.display = 'none'
-})
-
 export const hassleActions = (fetchy, looper, search) => {
 
     type = localStorage.getItem('type')
@@ -46,10 +39,7 @@ export const hassleActions = (fetchy, looper, search) => {
     if (query.s || query.u) {
         query.s ? newURL += '&search=' + query.s : null
         query.u ? newURL += '&user=' + query.u : null
-
         $('.easyNav').classList.add('showEasyNav')
-    } else {
-        features === 'hidden' ? $('.features').style.display = 'none' : $('.features').style.display = 'block'
     }
 
 
@@ -95,7 +85,7 @@ export const hassleActions = (fetchy, looper, search) => {
                 return response.json()
             })
             .then(data => {
-
+                console.log(data)
                 userData.privacy = data.privacy
                 userData.hassles = data.hassles
 
@@ -271,30 +261,13 @@ export const hassleActions = (fetchy, looper, search) => {
 
                     $('#add-remove').addEventListener("submit", e => {
                         e.preventDefault()
-                        let array = userData.privacy[types[type]]
                         const val = $('#add-remove input').value
-                        console.log(val.length)
-                        if (val.length > 3 && array.includes(val)) {
-                            if (array.length > 1) {
-                                array = array.filter(u => u != val)
-                                alert(`User @${val} removed. Don't forget to update.`)
-                            } else {
-                                alert('You have to add at least one user to be able to set Custom visibility.')
-                            }
+                        if (userData.privacy[types[type]].includes(val)) {
+                            userData.privacy[types[type]] = userData.privacy[types[type]].filter(user => user !== val)
                         } else {
-                            if (val.length > 3) {
-                                array.push(val)
-                                alert(`User @${val} added. Don't forget to update.`)
-                            }
+                            userData.privacy[types[type]].push(val)
                         }
-                        userData.privacy[types[type]] = array
-                        let users = ''
-                        if (userData.privacy[types[type]].length) {
-                            userData.privacy[types[type]].forEach(el => {
-                                users += el + ', '
-                            })
-                        }
-                        $('#add-remove i').innerHTML = users.replace(/,\s*$/, "");
+                        $('#add-remove i').innerHTML = userData.privacy[types[type]]
                     })
 
                     //////////// END OF NEW STUFF
@@ -327,6 +300,7 @@ export const hassleActions = (fetchy, looper, search) => {
                             $('#hassles').innerHTML = ''
                             $('#hassles').style = ''
                             $('#rollin').innerHTML = `<img src="/img/rollin.jpg" />`
+                            $('#mainHeading span').textContent += ' is empty.'
                             $('.query-text').innerHTML = `🔍 Nada, zilch, zero results for user <b>@${query.u}</b> 🤷‍♀️`
                         }
                         if (data.status.errno) {
@@ -348,6 +322,7 @@ export const hassleActions = (fetchy, looper, search) => {
 
                 if (user && (typeof userData.hassles === 'object' && userData.hassles.length === 0)) {
                     $('#rollin').innerHTML = `<img src="/img/rollin.jpg" />`
+                    $('#mainHeading span').textContent += ' is empty.'
                     $('#hassles').style = 'display: none !important'
                 } else {
                     $('#hassles').style = 'display: grid'
@@ -403,9 +378,9 @@ export const hassleActions = (fetchy, looper, search) => {
 
                 $('#hassle-user').addEventListener("click", e => {
                     if (query.u) {
-                        navigator.clipboard.writeText('https://hassle.com?user=' + query.u)
+                        navigator.clipboard.writeText('https://hassle.app?user=' + query.u)
                     } else {
-                        navigator.clipboard.writeText('https://hassle.com?user=' + user)
+                        navigator.clipboard.writeText('https://hassle.app?user=' + user)
                     }
                     const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
                     $('#hassle-user b').style.color = '#db463e'

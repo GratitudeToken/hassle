@@ -41,16 +41,28 @@ app.get('/gethassles', (req, res) => {
   const user = req.query.user // this is the user from url format, Example: domain?user=lucianape3
   let userToRead
 
-  const stats = JSON.parse(fs.readFileSync(`./hassle-data/stats.json`))
+  if (auth && auth != 'undefined') { userToRead = auth }
+  if (user && user != 'undefined') { userToRead = user }
+
+  let stats = JSON.parse(fs.readFileSync(`./hassle-data/stats.json`))
+
   const members = JSON.parse(fs.readFileSync(`./hassle-data/members.json`))
 
-
-  if (auth !== 'undefined' && (!members || !members[auth])) {
+  if (auth && (!members || !members[auth])) {
 
     const newUserFile = { "privacy": [0, 0, 0, 0], "hassles": { "weekly": [], "monthly": [], "wishlist": [], "crowdfunded": [] } }
 
     fs.writeFileSync(`./hassle-data/users/${auth}.json`, JSON.stringify(newUserFile))
+
+    members[auth] = {
+      "kyc": false,
+      "banned": false
+    }
+
+    fs.writeFileSync(`./hassle-data/members.json`, JSON.stringify(members))
   }
+
+
 
   //search function
   const searchStringInJSON = (str, json) => {
@@ -68,12 +80,7 @@ app.get('/gethassles', (req, res) => {
     return results
   }
 
-  if (auth && auth != undefined && auth != 'undefined' && auth != 'null' && auth != 'false' && auth != 'true') {
-    userToRead = auth
-    if (req.query.user != auth && req.query.user != undefined && req.query.user != 'undefined' && req.query.user != 'null' && req.query.user != 'false' && req.query.user != 'true') {
-      userToRead = req.query.user
-    }
-  } else { userToRead = req.query.user }
+
 
   fs.readFile(`./hassle-data/users/${userToRead}.json`, (err, fileContent) => {
     if (!err) {
@@ -89,12 +96,12 @@ app.get('/gethassles', (req, res) => {
       }
 
 
-      if (auth && auth != undefined && auth != 'undefined' && auth != 'null' && auth != 'false' && auth != 'true') {
+      if (auth && auth != 'undefined') {
 
         if (members[auth].banned === true) {
           response = { "status": 403, members, privacy, stats }
         } else {
-          if (user && user != auth && user != undefined && user != 'undefined' && user != 'null' && user != 'false' && user != 'true') {
+          if (user && user != auth && user != undefined && user != 'undefined' && user != 'null') {
             if (members[user]) {
               if (members[user].banned === true) {
                 // user from query is banned
@@ -120,7 +127,7 @@ app.get('/gethassles', (req, res) => {
         }
       } else {
         // NO AUTH
-        if (req.query.user && user != undefined && user != 'undefined' && user != 'null' && user != 'false' && user != 'true') {
+        if (req.query.user && user != undefined && user != 'undefined' && user != 'null') {
           if (members[user]) {
             if (members[user].banned === false) {
               if (privacy[types[req.query.type]] === 1) {
@@ -149,9 +156,9 @@ app.get('/gethassles', (req, res) => {
       privacy = [0, 0, 0, 0]
       response = { "status": err, members, privacy, stats }
     }
-
     res.send(response)
   })
+
 })
 
 
@@ -215,7 +222,7 @@ app.put('/delete', (req, res) => {
 })
 
 
-app.patch('/members', async (req, res) => {
+app.get('/members', async (req, res) => {
 
   const object = {}
   object.user = req.query.user

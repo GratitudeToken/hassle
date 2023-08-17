@@ -13,22 +13,21 @@ export const addBTN = () => {
     $('#add').addEventListener('click', (event) => {
         localStorage.setItem('tip-0', 'hidden')
         $('#tip-0').style.display = 'none'
-        $('#hassle-form-container').style.display = 'flex'
-        $('#hassles').style.filter = 'blur(3px)'
-        $('#close').style.display = 'block'
+        $('#hassle-form-container').classList.toggle('flex-it')
+        $('#hassles').classList.toggle('blur-it')
     })
     renderImageResults()
 }
 
 export const closeBTN = () => {
     $('#close').addEventListener('click', (event) => {
-        $('#hassle-form-container').style.display = 'none'
-        $('#hassles').style.filter = 'none'
+        $('#hassle-form-container').classList.remove('flex-it')
+        $('#hassles').classList.remove('blur-it')
     })
     document.addEventListener('keydown', evt => {
         if (evt.key === 'Escape') {
-            $('#hassle-form-container').style.display = 'none'
-            $('#hassles').style.filter = 'none'
+            $('#hassle-form-container').classList.remove('flex-it')
+            $('#hassles').classList.remove('blur-it')
         }
     })
 }

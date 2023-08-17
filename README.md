@@ -1,2 +1,4 @@
 # hassle
-Hassle is a Web 3 household shopping list with WebAuth authentication.
+hassle.app is a Web 3 list manager with WebAuth authentication.
+
+https://hassle.app

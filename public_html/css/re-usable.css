@@ -97,3 +97,15 @@
     visibility: visible !important;
     pointer-events: all !important;
 }
+
+body .flex-it {
+    display: flex !important
+}
+
+body .block-it {
+    display: block !important;
+}
+
+body .blur-it {
+    filter: blur(3px) !important
+}
