@@ -127,8 +127,6 @@ const transferPayload = (type, contract, amount, decimals, symbol) => {
 
     transfer(contract, query.u, amount, decimals, symbol)
         .then(resp => {
-            console.log(resp)
-
             fetch(url + `members?user=${user}&login=false&queryu=${query.u}&type=${type}&tx=${resp.processed.id}&amount=${$('#total input[type=number]').value}&currency=${symbol}`, {
                 method: "GET"
             }).then(response => {

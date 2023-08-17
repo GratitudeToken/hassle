@@ -85,7 +85,7 @@ export const hassleActions = (fetchy, looper, search) => {
                 return response.json()
             })
             .then(data => {
-                console.log(data)
+
                 userData.privacy = data.privacy
                 userData.hassles = data.hassles
 
