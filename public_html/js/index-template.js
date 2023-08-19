@@ -2,8 +2,8 @@ import { $ } from '/js/selectors.js'
 export class indexHTML {
     insertHTML(data) {
         $('#rollin').innerHTML = ''
-        const tokenRate = JSON.parse(localStorage.getItem('selectedToken'))
-        const symbol = Object.keys(tokenRate)[0] || 'XUSDT'
+        const tokenRate = JSON.parse(localStorage.getItem('tokenRate'))
+        const symbol = Object.keys(tokenRate)[0]
 
         // check if we have an image
         let imageSRC

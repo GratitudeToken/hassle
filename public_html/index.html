@@ -23,23 +23,23 @@
     <!-- << SHARED HEAD CODE: End >> -->
 
     <!-- << SPECIFIC HEAD CODE: Start >> -->
-    <meta name="description" content="A cool, shareable, crowdfundable shopping list">
+    <meta name="description" content="Crowdfundable Web 3 powered shopping lists">
     <!-- Open Graph -->
     <meta property="og:title" content="hassle" />
     <meta property="og:type" content="website" />
-    <meta property="og:description" content="A cool, shareable, crowdfundable shopping list" />
+    <meta property="og:description" content="Crowdfundable Web 3 powered shopping lists" />
     <meta property="og:image" content="https://hassle.app/img/hassle.jpg" />
     <meta property="og:url" content="https://hassle.app" />
     <meta property="og:site_name" content="hassle" />
 
     <!-- Twitter Cards -->
     <meta name="twitter:title" content="hassle.app">
-    <meta name="twitter:description" content="A cool, shareable, crowdshopping list">
+    <meta name="twitter:description" content="Crowdfundable Web 3 powered shopping lists">
     <meta name="twitter:image" content="https://hassle.app/img/hassle-twitter.jpg">
     <meta name="twitter:site" content="@Gratitude_World">
     <meta name="twitter:creator" content="@Lucian_Apetrei">
 
-    <title>A cool, shareable, crowdfundable shopping list</title>
+    <title>Crowdfundable Web 3 powered shopping lists</title>
 
     <!-- Style -->
     <link class="themeCSS" rel="stylesheet" href="/css/default-theme.css">
@@ -60,7 +60,7 @@
             <a class="logo" href="/"></a>
             <nav id="nav"><button id="add" title="Add a hassle"><img class="small-icon invert2" alt="hassle list"
                         src="/svgs/lightning.svg" /></button><span id="tip-0" class="tip tip-left">+ Add your first
-                    hassle</span></nav>
+                    item</span></nav>
             <div id="user-menu" class="flex">
                 <b id="avatar-name"></b>
                 <div class="avatar-container"><img class="avatar" title="Authenticate" alt="avatar"
@@ -102,7 +102,7 @@
                     <label for="weekly">
                         <span><img class="small-icon invert" src="/svgs/lightning.svg" />Weekly</span>
                         <span class="privacy" data-cat="weekly">
-                            <img class="small-icon invert" title="Private" src="/svgs/locked-simple.svg" />
+                            <img class="small-icon invert" src="/svgs/locked-simple.svg" />
                         </span>
                     </label>
 
@@ -110,7 +110,7 @@
                     <label for="monthly">
                         <span><img class="small-icon invert" src="/svgs/calendar-simpler.svg" />Monthly</span>
                         <span class="privacy" data-cat="monthly">
-                            <img class="small-icon invert" title="Private" src="/svgs/locked-simple.svg" />
+                            <img class="small-icon invert" src="/svgs/locked-simple.svg" />
                         </span>
                     </label>
 
@@ -118,7 +118,7 @@
                     <label for="wishlist">
                         <span><img class="small-icon invert" src="/svgs/magic-wand.svg" />Wishlist</span>
                         <span class="privacy" data-cat="wishlist">
-                            <img class="small-icon invert" title="Private" src="/svgs/locked-simple.svg" />
+                            <img class="small-icon invert" src="/svgs/locked-simple.svg" />
                         </span>
                     </label>
 
@@ -126,7 +126,7 @@
                     <label for="crowdfunded">
                         <span><img class="small-icon invert" src="/svgs/crowd-fund-simpler.svg" />Crowdfunded</span>
                         <span class="privacy" data-cat="crowdfunded">
-                            <img class="small-icon invert" title="Private" src="/svgs/locked-simple.svg" />
+                            <img class="small-icon invert" src="/svgs/locked-simple.svg" />
                         </span>
                     </label>
                 </form>
@@ -216,9 +216,13 @@
                     </form>
                 </div>
                 <div class="features">
+                    <iframe id="yt" style="display: block; margin: 0 auto 23px auto"
+                        src="https://www.youtube.com/embed/UPmBs1BXrGE" title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
                     <img id="close-features" src="/svgs/close.svg" alt="close icon" />
                     <img style="width: 230px" title="hassle" alt="hassle" src="/svgs/hassle-logo.svg" />
-                    <h1 style="font-size: 12px;"><i>Shopping lists with Web 3 authentication.</i>
+                    <h1 style="font-size: 12px;"><i>Crowdfundable Web 3 powered shopping lists</i>
                     </h1>
                     <div style="padding-top: 0 !important; font-size: 16px">
                         <p>Some people use it for shopping lists and
@@ -240,8 +244,24 @@
                                 with family and
                                 friends.</i></div>
                         <div><img src="/svgs/crowd-fund.svg"
-                                alt="Crowd-fund your hassle list" /><b>Crowdfund!</b><br><i>Any user can fund your
-                                hassle</i></div>
+                                alt="Crowd-fund your hassle list" /><b>Crowdfund!</b><br><i>Help fund other lists or get
+                                funded.</i>
+                        </div>
+                    </div>
+                    <div class="lefty flex">
+                        <img src="/img/hassle.png" alt="hassle.app" />
+                        <span>
+                            <h2>Yo, listen up!</h2>
+                            Tired of juggling shopping
+                            lists on Notes, WhatsApp and other unfit apps? We've got you covered, fam! With Hassle,
+                            you've got a
+                            Web 3
+                            shopping list that's here to
+                            save the day. No more getting lost in the supermarket shuffle. Keep your shopping list
+                            locked
+                            and loaded, breeze through
+                            those aisles like a pro, and never forget those essentials again! 🛒🥑
+                        </span>
                     </div>
                     <p class="notification"><b style="color: green"><img class="medium-icon"
                                 style="margin: -2px 6px 0 0" src="/svgs/exclamation.svg"
@@ -252,7 +272,12 @@
                             alt="Connect wallet - Unlocked" src="/svgs/qr.svg" />Connect wallet</button></h1>
                 <div id="hassles"></div>
                 <div id="rollin"></div>
-                <div id="user-cards"></div>
+                <div id="user-cards-container">
+                    <h2>Latest users</h2>
+                    <div id="user-cards">
+                        <ul></ul>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -263,16 +288,17 @@
                 href='https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7031108514819289088'
                 target='_blank'>Subscribe on LinkedIn</a></div>
 
-        <div class="shareThis">Share this hassle:</div>
+        <div class="shareThis">Spread the word with a quick share?</div>
         <div class="sharethis-inline-share-buttons"></div>
 
         <footer>
             <copy>© 2023 Copyright | <a href="https://gratitudetoken.world"
                     target="_blank">GratitudeToken.world</a><br><br>
                 <a href="/license-copyright.html">Open Source License (GNU GPL 3)</a><br><br>
-                <p><i>🔥 This is a lit open-source
-                        project put together by volunteer fam. If you're vibin' with the app, why not drop some coins
-                        for the Proton username</i> <b>@hassle</b> ? 🙌</p>
+                <p><i>🔥 <b>This is a lit open-source
+                            project put together by volunteer fam.</b><br>If you're vibin' with the app, why not drop
+                        some coins
+                        for the Proton username</i> <b>@hassle</b> to help with development? 🙌</p>
                 <a class="webauth-hand" title="Install the WebAuth wallet app" href="/wallets"></a><br><span
                     id="siteseal">
                     <script async="" type="text/javascript"

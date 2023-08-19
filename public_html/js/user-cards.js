@@ -1,8 +1,14 @@
+import { $ } from '/js/selectors.js'
 export class userCards {
     usersHTML(data) {
+        const nr = Object.keys(data.members).length
+        if ($('body').offsetWidth > 959) {
+            $('#user-cards ul').style = `width: ${(nr * 200) - nr * 10 + 90}px; animation: marquee ${nr * 10}s infinite linear`
+        }
+
         let allData = data
 
-        let theHTML = '<h2><b>Latest</b><br>users</h2>'
+        let theHTML = ''
 
         //Iterate through each property (user) in the object
         for (const user in allData.stats) {
@@ -13,16 +19,15 @@ export class userCards {
                 userStats += `<img class="type-svg" src="/svgs/${allData.typesSVG[i]}.svg" alt="Number of hassles" /> ${number}`
             })
 
-            theHTML += `<a href="/?user=${user}" class="user-card" title="@${user}">
+            theHTML += `<li><a href="/?user=${user}" class="user-card" title="@${user}">
                                 <div class="avatar"><img alt="avatar ${user}" src="/avatars/${user}.webp"/></div>
-                                <div class="white-gradient"></div>
                                 <div class="statz">
                                     <h3>${user}</h3>
                                     <div>
                                         ${userStats} 
                                     </div>
                                 </div>
-                        </a>`
+                        </a></li>`
 
         }
 

@@ -34,7 +34,7 @@ export const submitHassle = (userQuery, type) => {
 
                 if (returnedData.status === 200) {
                     hassleActions(true, true);
-                    // ^ AICI E PROBLEMA CA NU TRIMIT OBJECTU ALA ... tre sa se ia mereu in post actions
+                    $('#mainHeading span').textContent = $('#mainHeading span').textContent.replace(" is empty.", "");
                     $('#hassle-form-container').style.display = 'none';
                 }
             })

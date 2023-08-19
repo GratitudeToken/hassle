@@ -25,6 +25,32 @@
   width: 100%;
 }
 
+.lefty {
+  text-align: left;
+  margin: 64px 0 32px 0;
+}
+
+.lefty span,
+.lefty h2 {
+  text-align: left;
+}
+
+.lefty h2 {
+  color: var(--second-contrast);
+  font-size: 32px;
+  padding: 5px 0 0 0;
+}
+
+.lefty img {
+  margin-right: 23px;
+}
+
+.lefty span {
+  display: block;
+  padding: 0 0 0 23px;
+  line-height: 1.8;
+}
+
 #confetti {
   pointer-events: none;
   position: fixed;
@@ -35,6 +61,13 @@
   overflow: visible;
   z-index: 9999999;
   transition: opacity 3s
+}
+
+#yt {
+  display: block;
+  margin: 0 auto 23px auto;
+  width: 690px;
+  height: 388px;
 }
 
 #custom-substack-embed form {
@@ -119,9 +152,27 @@
     padding-top: 69px;
   }
 
-  .features .grid-3 {
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: repeat(1, 1fr);
+  .lefty {
+    text-align: center;
+    display: block;
+    padding: 0 15px;
+  }
+
+  .lefty span {
+    padding: 0
+  }
+
+  .lefty img {
+    margin: 0 !important
+  }
+
+  .lefty h2 {
+    text-align: center;
+  }
+
+  #yt {
+    width: 100%;
+    height: 30vh;
   }
 
   .first-paragraph i {
@@ -130,7 +181,6 @@
 
   #rollin {
     padding: 10px;
-
   }
 
   #rollin img {
@@ -205,11 +255,59 @@
     display: block !important;
   }
 
+  #user-cards-container {
+    opacity: 1;
+    padding: 0 10px
+  }
+
   #user-cards {
+    height: auto !important;
+    overflow: visible;
+    border-radius: 5px !important;
+  }
+
+  #user-cards:after {
+    display: none
+  }
+
+  #user-cards ul {
+    animation-play-state: paused !important;
+    background: rgba(35, 35, 35, 1);
+    width: 100% !important;
+    height: auto !important;
+    display: grid;
+    gap: 23px 5px;
     border-radius: 5px;
-    margin-top: 23px !important;
-    padding: 0 10px;
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    transform: translateX(0) !important;
+  }
+
+  #user-cards ul li {
+    margin-right: 0;
+  }
+
+  #user-cards ul li,
+  #user-cards ul li a {
+    width: auto !important
+  }
+
+  #user-cards ul li a {
+    overflow: visible;
+  }
+
+  .user-card h3 {
+    padding: 7px 10px 5px 10px;
+  }
+
+  #user-cards .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 32px;
+  }
+
+  .statz {
+    font-size: 11px
   }
 
   .hassle {
@@ -238,6 +336,7 @@
 
   #mainHeading button {
     margin: 19px 0 0 0;
+    color: var(--white)
   }
 
   .hassle h2 {

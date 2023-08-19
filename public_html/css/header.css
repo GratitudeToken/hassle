@@ -107,8 +107,8 @@
     text-align: left;
 }
 
-.authenticated {
-    top: 10px !important
+.authenticated #menu-options {
+    top: 9px
 }
 
 #menu-options button:first-of-type {

@@ -97,16 +97,14 @@ export const hassleActions = (fetchy, looper, search) => {
                 let tokenRate
                 let symbol
 
-
-                if (!localStorage.getItem('selectedToken')) {
-                    localStorage.setItem('selectedToken', '{"XUSDT": 1}')
+                if (!localStorage.getItem('tokenRate')) {
+                    localStorage.setItem('tokenRate', '{"XUSDT": 1}')
                     tokenRate = { "XUSDT": 1 }
                     symbol = 'XUSDT'
                 } else {
-                    tokenRate = JSON.parse(localStorage.getItem('selectedToken'))
+                    tokenRate = JSON.parse(localStorage.getItem('tokenRate'))
                     symbol = Object.keys(tokenRate)[0]
                 }
-
 
                 // update some things depending if we have userQuery or not
                 if (query.u) {
@@ -300,7 +298,6 @@ export const hassleActions = (fetchy, looper, search) => {
                             $('#hassles').innerHTML = ''
                             $('#hassles').style = ''
                             $('#rollin').innerHTML = `<img src="/img/rollin.jpg" />`
-                            $('#mainHeading span').textContent += ' is empty.'
                             $('.query-text').innerHTML = `🔍 Nada, zilch, zero results for user <b>@${query.u}</b> 🤷‍♀️`
                         }
                         if (data.status.errno) {
@@ -329,7 +326,7 @@ export const hassleActions = (fetchy, looper, search) => {
                 }
 
 
-                $('#user-cards').innerHTML = html.usersHTML({ ...data, types, typesKeys, typesSVG })
+                $('#user-cards ul').innerHTML = html.usersHTML({ ...data, types, typesKeys, typesSVG })
 
 
                 $$('.user-card').forEach(el => {

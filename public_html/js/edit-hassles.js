@@ -13,6 +13,9 @@ export const editHassles = (data) => {
         if (event.target.classList.contains('update-it')) {
             let postData = data
             postData.edit = query.u || user
+            postData.hassles.forEach((el, i) => {
+                postData.hassles[i].id = i + 1
+            })
             if (membership === true) {
 
                 // Sends hassle request to /hassle with all input information

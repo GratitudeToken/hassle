@@ -89,10 +89,10 @@ module.exports.members = async function (user, authenticating, queryu, type, tx,
   let kyc = rows[0].kyc[0]
 
   kyc ? kyc = kyc.kyc_level.includes('selfie' || 'frontofid') : kyc = false
-  let accountTokens = await protonApi.getAccountTokens(user)
-  accountTokens = accountTokens.filter(symbol => symbol.currency === 'XPR' || symbol.currency === 'GRAT' || symbol.currency === 'XUSDT')
+  let balance = await protonApi.getAccountTokens(user)
+  balance = balance.filter(symbol => symbol.currency === 'XPR' || symbol.currency === 'GRAT' || symbol.currency === 'XUSDT')
 
-  const tokenSymbolsArray = accountTokens.map(({ currency }) => currency)
+  const tokenSymbolsArray = balance.map(({ currency }) => currency)
 
   // Example:  ['GRAT','XPR','XUSDT']
 
@@ -163,5 +163,5 @@ module.exports.members = async function (user, authenticating, queryu, type, tx,
     }
   }
 
-  return { members, accountTokens, averageRates }
+  return { members, balance, averageRates }
 }

@@ -1,8 +1,8 @@
 import { $ } from '/js/selectors.js'
+import { hassleActions, types } from '/js/hassle-actions.js';
 import { user } from '/js/proton.js'
 import { search } from '/js/search.js';
 import { queryParams } from '/js/queries.js'
-import { hassleActions, types } from '/js/hassle-actions.js';
 import { addBTN, closeBTN } from '/js/event-listeners.js';
 addBTN(); closeBTN();
 
@@ -27,7 +27,7 @@ if (features === 'hidden') {
     $('.features').style.display = 'block'
 }
 
-const headings = ['weekly shopping list', 'monthly shopping list', 'wishlist', 'crowdfunded list']
+const headings = ['weekly shopping list', 'monthly expenses list', 'wishlist', 'crowdfunded list']
 
 const headingRender = (queryU) => {
     if (queryU) {

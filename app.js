@@ -40,7 +40,7 @@ app.get('/gethassles', (req, res) => {
 
   const members = JSON.parse(fs.readFileSync(`./hassle-data/members.json`))
 
-  if (auth && (!members || !members[auth])) {
+  if (auth && auth != 'undefined' && (!members || !members[auth])) {
 
     const newUserFile = { "privacy": [0, 0, 0, 0], "hassles": { "weekly": [], "monthly": [], "wishlist": [], "crowdfunded": [] } }
 
@@ -178,18 +178,20 @@ app.post('/hassle', (req, res) => {
     }
   } else {
     fs.readFile(`./hassle-data/users/${req.body.edit}.json`, (err, fileContent) => {
-      let oldHassles
+
       if (!err) {
+        let oldHassles
+        console.log('Error on read: ' + err)
+        console.log('File content: ' + fileContent)
         oldHassles = JSON.parse(fileContent)
-      }
+        oldHassles.hassles[req.body.type] = req.body.hassles
+        oldHassles.privacy = req.body.privacy
 
-      oldHassles.hassles[req.body.type] = req.body.hassles
-      oldHassles.privacy = req.body.privacy
-
-      fs.writeFile(`./hassle-data/users/${req.body.edit}.json`, JSON.stringify(oldHassles), err => {
-        console.log('Error: ' + err)
-      })
-      res.send({ "status": 200 })
+        fs.writeFile(`./hassle-data/users/${req.body.edit}.json`, JSON.stringify(oldHassles), err => {
+          console.log('Error on write: ' + err)
+        })
+        res.send({ "status": 200 })
+      } else { res.send({ "status": 404, "error": err }) }
     })
   }
 
@@ -206,6 +208,10 @@ app.put('/delete', (req, res) => {
 
     fs.writeFileSync(`./hassle-data/users/${userFile}.json`, JSON.stringify(oldHassles))
 
+    // update stats file
+    const stats = JSON.parse(fs.readFileSync(`./hassle-data/stats.json`)) || {}
+    stats[userFile] = [oldHassles.hassles.weekly.length, oldHassles.hassles.monthly.length, oldHassles.hassles.wishlist.length, oldHassles.hassles.crowdfunded.length]
+    fs.writeFileSync(`./hassle-data/stats.json`, JSON.stringify(stats))
 
     res.send({ "status": 200 })
   } catch (err) {

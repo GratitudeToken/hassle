@@ -1,1 +1,289 @@
-{"privacy":[0,["fatzuca"],0,1],"hassles":{"weekly":[{"id":1,"user":"fatzuca","price":50.16,"units":4,"title":"tomatoes","image":"https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg","date":"2023-01-10T11:39:00.423Z"},{"id":2,"user":"lucianape3","price":2.3,"units":10,"title":"cucumbers","image":"https://www.freshpoint.com/wp-content/uploads/2020/02/freshpoint-english-cucumber-scaled.jpg","date":"2023-01-10T11:39:00.423Z"},{"id":3,"user":"lucianape3","price":100,"units":1,"title":"lemons","image":"https://media.healthyfood.com/wp-content/uploads/2017/03/In-season-August-Lemons-500x332.jpg","date":"2023-01-10T11:39:00.423Z"},{"id":4,"user":"lucianape3","price":1,"units":1,"title":"rye bread","image":"https://www.mashed.com/img/gallery/what-is-rye-bread-and-is-it-nutritious/intro-1645922315.jpg","date":"2023-01-10T11:39:00.423Z"},{"id":5,"user":"lucianape3","price":1,"units":1,"title":"beyond meat burger","image":"https://beyond-meat-cms-production.s3.us-west-2.amazonaws.com/c9a2a959-7f91-47c0-9119-c7e437ff65e6.png","date":"2023-01-10T11:39:00.423Z"},{"id":6,"user":"lucianape3","price":1,"units":1,"title":"bomboane cu gandaci","image":"https://upload.wikimedia.org/wikipedia/commons/e/e5/Plain-M%26Ms-Pile.jpg","date":"2023-01-10T11:39:00.423Z"},{"id":7,"user":"lucianape3","price":1,"units":1,"title":"naturli butter","image":"https://static2.bioshi24.ro/rum_pl_Margarina-vegana-BIO-cubulete-200-g-Naturli-79674_1.jpg","date":"2023-01-10T11:39:00.423Z"},{"id":8,"user":"lucianape3","price":1,"units":1,"title":"parsley","image":"https://cdn.britannica.com/62/193862-050-4A7DBC6F/Parsley.jpg","date":"2023-01-10T11:39:00.423Z"},{"id":9,"user":"lucianape3","price":1,"units":1,"title":"Lays Chanterelles","image":"https://i.ebayimg.com/images/g/1YEAAOSwDJRgSMfx/s-l1200.webp","date":"2023-01-10T11:39:00.423Z"},{"id":10,"user":"lucianape3","price":1,"units":1,"title":"vegan fish fingers","image":"https://i.dailymail.co.uk/1s/2019/01/01/00/8001592-0-image-a-23_1546301276566.jpg","date":"2023-01-10T11:39:00.423Z"},{"id":11,"user":"lucianape3","price":1,"units":1,"title":"naturli soia schintzel","image":"https://www.naturli-foods.ro/wp-content/uploads/2022/05/naturli_schnitzel-1024x996-1.webp","date":"2023-01-10T11:39:00.423Z"},{"id":12,"user":"lucianape3","price":100,"units":1,"title":"humus Chef Select","image":"https://images.openfoodfacts.org/images/products/20790264/front_en.4.full.jpg","date":"2023-01-10T11:39:00.423Z"}],"monthly":[{"id":1,"user":"lucianape3","price":230,"units":1,"title":"rent","image":"https://images.adsttc.com/media/images/577f/31e3/e58e/ce56/2300/00b9/large_jpg/_G6I5343_1.jpg?1467953625","date":"2023-01-10T11:39:00.423Z"},{"id":2,"user":"lucianape3","price":50,"units":1,"title":"electricity bill","image":"https://www.electricrate.com/wp-content/uploads/2021/07/How-Electricity-Works.jpg.png","date":"2023-01-10T11:39:00.423Z"},{"id":3,"user":"lucianape3","price":80,"units":1,"title":"gas bill","image":"https://image.coolblue.nl/624x351/content/74e768dd5417ac4744d27e46e1e28514","date":"2023-01-10T11:39:00.423Z"}],"wishlist":[{"id":1,"user":"lucianape3","price":120000,"units":1,"title":"Tesla Model X","image":"https://media.wired.co.uk/photos/606d9b03dbc4c121710a3d36/4:3/w_1708,h_1281,c_limit/tesla1.jpg","date":"2023-01-10T11:39:00.423Z"},{"id":2,"user":"lucianape3","type":"wishlist","price":1000,"units":1,"title":"Samsung Galaxy S23","image":"https://m-cdn.phonearena.com/images/reviews/247907-image/BK6A4665.jpg","date":"2023-08-13T16:33:08.075Z"},{"id":3,"user":"lucianape3","type":"wishlist","price":40000,"units":1,"title":"Hyundai Kona Electric","image":"https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/segment_review/hero_image/2022-Hyundai-Kona-Electic-Standard-Range-SUV-Blue-Richard-Berry-1001x565-1.jpg","date":"2023-08-13T16:34:21.711Z"}],"crowdfunded":[{"id":1,"user":"lucianape3","type":"crowdfunded","price":218.751,"units":1,"title":"https://hassle.app/profile.jpg","image":"https://hassle.app/profile.jpg","date":"2023-08-15T08:20:43.881Z"}]}}
+{
+    "privacy": [
+        1,
+        [
+            "fatzuca"
+        ],
+        0,
+        1
+    ],
+    "hassles": {
+        "weekly": [
+            {
+                "id": 1,
+                "user": "fatzuca",
+                "price": 3,
+                "units": 4,
+                "title": "tomatoes",
+                "image": "https://upload.wikimedia.org/wikipedia/commons/8/89/Tomato_je.jpg",
+                "date": "2023-01-10T11:39:00.423Z"
+            },
+            {
+                "id": 2,
+                "user": "lucianape3",
+                "price": 2.6,
+                "units": 1,
+                "title": "lemons",
+                "image": "https://media.healthyfood.com/wp-content/uploads/2017/03/In-season-August-Lemons-500x332.jpg",
+                "date": "2023-01-10T11:39:00.423Z"
+            },
+            {
+                "id": 3,
+                "user": "lucianape3",
+                "price": 1.8,
+                "units": 1,
+                "title": "rye bread",
+                "image": "https://www.mashed.com/img/gallery/what-is-rye-bread-and-is-it-nutritious/intro-1645922315.jpg",
+                "date": "2023-01-10T11:39:00.423Z"
+            },
+            {
+                "id": 4,
+                "user": "lucianape3",
+                "price": 4,
+                "units": 1,
+                "title": "beyond meat burger",
+                "image": "https://beyond-meat-cms-production.s3.us-west-2.amazonaws.com/c9a2a959-7f91-47c0-9119-c7e437ff65e6.png",
+                "date": "2023-01-10T11:39:00.423Z"
+            },
+            {
+                "id": 5,
+                "user": "lucianape3",
+                "price": 3,
+                "units": 1,
+                "title": "naturli butter",
+                "image": "https://static2.bioshi24.ro/rum_pl_Margarina-vegana-BIO-cubulete-200-g-Naturli-79674_1.jpg",
+                "date": "2023-01-10T11:39:00.423Z"
+            },
+            {
+                "id": 6,
+                "user": "lucianape3",
+                "price": 4,
+                "units": 1,
+                "title": "vegan fish fingers",
+                "image": "https://i.dailymail.co.uk/1s/2019/01/01/00/8001592-0-image-a-23_1546301276566.jpg",
+                "date": "2023-01-10T11:39:00.423Z"
+            },
+            {
+                "id": 7,
+                "user": "lucianape3",
+                "price": 4,
+                "units": 1,
+                "title": "naturli soia schintzel",
+                "image": "https://www.naturli-foods.ro/wp-content/uploads/2022/05/naturli_schnitzel-1024x996-1.webp",
+                "date": "2023-01-10T11:39:00.423Z"
+            },
+            {
+                "id": 8,
+                "user": "lucianape3",
+                "price": 1.5,
+                "units": 1,
+                "title": "humus Chef Select",
+                "image": "https://images.openfoodfacts.org/images/products/20790264/front_en.4.full.jpg",
+                "date": "2023-01-10T11:39:00.423Z"
+            },
+            {
+                "id": 9,
+                "user": "lucianape3",
+                "type": "weekly",
+                "price": 5,
+                "units": 1,
+                "title": "fruits",
+                "image": "https://www.utphysicians.com/wp-content/uploads/2022/02/fruits-and-vegetables-rainbow.jpg",
+                "date": "2023-08-18T10:02:10.110Z"
+            },
+            {
+                "id": 10,
+                "user": "lucianape3",
+                "type": "weekly",
+                "price": 2,
+                "units": 1,
+                "title": "cucumbers",
+                "image": "https://brooklynfarmgirl.com/wp-content/uploads/2020/07/How-to-Store-Cucumbers-to-Make-Them-Last_2-768x1024.jpg",
+                "date": "2023-08-18T10:03:11.805Z"
+            },
+            {
+                "id": 11,
+                "user": "lucianape3",
+                "type": "weekly",
+                "price": 6,
+                "units": 1,
+                "title": "lenor",
+                "image": "https://prd-cdn-emea1-joltx.pgsitecore.com/-/media/growing-families-version1/gf-uk/products/lenor/proj020554_lenor_gold_orchid_4_resized_480x480_new1.ashx?rev=a4b9a5a99cfc4ab987734bf887e0404a",
+                "date": "2023-08-18T19:54:04.587Z"
+            },
+            {
+                "id": 12,
+                "user": "lucianape3",
+                "type": "weekly",
+                "price": 6,
+                "units": 1,
+                "title": "ariel detergent",
+                "image": "https://crix.ro/pub/media/catalog/product/cache/1/600x600/ariel-detergent-lichid-1-1l-mountain-spring-20-spalari-crx001816.jpg",
+                "date": "2023-08-18T19:54:21.518Z"
+            },
+            {
+                "id": 13,
+                "user": "lucianape3",
+                "type": "weekly",
+                "price": 1,
+                "units": 1,
+                "title": "patrunjel",
+                "image": "https://cumsa.ro/wp-content/uploads/2021/11/cum-sa-faci-vin-de-patrunjel-1024x576.jpg",
+                "date": "2023-08-18T19:55:03.366Z"
+            },
+            {
+                "id": 14,
+                "user": "lucianape3",
+                "type": "weekly",
+                "price": 1,
+                "units": 1,
+                "title": "marar",
+                "image": "https://magazin-agricol-online.ro/wp-content/uploads/2021/07/Seminte-marar-Commun-25-KG.jpg",
+                "date": "2023-08-18T19:55:09.389Z"
+            },
+            {
+                "id": 15,
+                "user": "lucianape3",
+                "type": "weekly",
+                "price": 4,
+                "units": 1,
+                "title": "cartofi dulci",
+                "image": "https://www.reteteleluiradu.ro/wp-content/uploads/2010/05/cartofi-dulci.jpg",
+                "date": "2023-08-18T19:55:20.855Z"
+            },
+            {
+                "id": 16,
+                "user": "lucianape3",
+                "type": "weekly",
+                "price": 4,
+                "units": 1,
+                "title": "suc presat la rece",
+                "image": "https://gomagcdn.ro/domains/edenshop.ro/files/product/original/storc%C4%83tor-hurom-prin-presare-la-rece-cu-ax-melcat-h-100-dbea01-3276-1214.jpg",
+                "date": "2023-08-18T19:59:56.511Z"
+            },
+            {
+                "id": 17,
+                "user": "lucianape3",
+                "type": "weekly",
+                "price": 5,
+                "units": 1,
+                "title": "borsec 6 pack",
+                "image": "https://c8.alamy.com/zooms/6/43bffd87b3584ca0b098b96bde4651d9/2h6marh.jpg",
+                "date": "2023-08-18T20:04:33.957Z"
+            },
+            {
+                "id": 18,
+                "user": "lucianape3",
+                "type": "weekly",
+                "price": 3.48,
+                "units": 1,
+                "title": "vegan cheese slices",
+                "image": "https://www.planetveggie.co.uk/wp-content/uploads/2022/04/violife-range-scaled.jpg",
+                "date": "2023-08-18T20:06:32.003Z"
+            },
+            {
+                "id": 19,
+                "user": "lucianape3",
+                "type": "weekly",
+                "price": 2.2,
+                "units": 1,
+                "title": "gellateli sorbet mango",
+                "image": "https://src.discounto.de/pics/Angebote/2019-05//4834164_Sorbet_xxl.jpg",
+                "date": "2023-08-18T20:07:49.950Z"
+            },
+            {
+                "id": 20,
+                "user": "lucianape3",
+                "type": "weekly",
+                "price": 3,
+                "units": 1,
+                "title": "caju",
+                "image": "http://1.bp.blogspot.com/_OfYYlOGGnDk/TE7jsgJ6RLI/AAAAAAAABl4/NSbXOH6dbbw/s1600/castanha-de-caju.jpg",
+                "date": "2023-08-18T20:09:48.402Z"
+            }
+        ],
+        "monthly": [
+            {
+                "id": 1,
+                "user": "lucianape3",
+                "price": 230,
+                "units": 1,
+                "title": "rent",
+                "image": "https://images.adsttc.com/media/images/577f/31e3/e58e/ce56/2300/00b9/large_jpg/_G6I5343_1.jpg?1467953625",
+                "date": "2023-01-10T11:39:00.423Z"
+            },
+            {
+                "id": 2,
+                "user": "lucianape3",
+                "price": 50,
+                "units": 1,
+                "title": "electricity bill",
+                "image": "https://www.electricrate.com/wp-content/uploads/2021/07/How-Electricity-Works.jpg.png",
+                "date": "2023-01-10T11:39:00.423Z"
+            },
+            {
+                "id": 3,
+                "user": "lucianape3",
+                "price": 80,
+                "units": 1,
+                "title": "gas bill",
+                "image": "https://image.coolblue.nl/624x351/content/74e768dd5417ac4744d27e46e1e28514",
+                "date": "2023-01-10T11:39:00.423Z"
+            },
+            {
+                "id": 4,
+                "user": "lucianape3",
+                "type": "monthly",
+                "price": 80,
+                "units": 1,
+                "title": "hosting costs",
+                "image": "https://www.digitaloperatingsolutions.com/wp-content/uploads/2023/04/web-hosting-1-1-768x512.jpeg",
+                "date": "2023-08-18T09:59:47.922Z"
+            }
+        ],
+        "wishlist": [
+            {
+                "id": 1,
+                "user": "lucianape3",
+                "type": "wishlist",
+                "price": 1500,
+                "units": 1,
+                "title": "Samsung Galaxy S23",
+                "image": "https://m-cdn.phonearena.com/images/reviews/247907-image/BK6A4665.jpg",
+                "date": "2023-08-13T16:33:08.075Z"
+            },
+            {
+                "id": 2,
+                "user": "lucianape3",
+                "type": "wishlist",
+                "price": 40000,
+                "units": 1,
+                "title": "Hyundai Kona Electric",
+                "image": "https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/segment_review/hero_image/2022-Hyundai-Kona-Electic-Standard-Range-SUV-Blue-Richard-Berry-1001x565-1.jpg",
+                "date": "2023-08-13T16:34:21.711Z"
+            },
+            {
+                "id": 3,
+                "user": "lucianape3",
+                "type": "wishlist",
+                "price": 170,
+                "units": 1,
+                "title": "Huawei Free buds Pro2",
+                "image": "https://techstomper.com/wp-content/uploads/2022/07/IMG_20220715_161629-780x497.jpg",
+                "date": "2023-08-18T10:00:15.136Z"
+            }
+        ],
+        "crowdfunded": [
+            {
+                "id": 1,
+                "user": "lucianape3",
+                "type": "crowdfunded",
+                "price": 123000,
+                "units": 1,
+                "title": "Tesla Model X",
+                "image": "https://cdn.shopify.com/s/files/1/1724/5219/files/black-tesla-model-x-t-largo-carbon-fiber-wide-body-kit-wm-12.jpg?12530052755699692553",
+                "date": "2023-08-18T09:50:09.897Z"
+            }
+        ]
+    }
+}

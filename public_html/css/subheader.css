@@ -1,7 +1,6 @@
 #subheader {
     height: auto;
-    background-color: var(--sub-header-bg);
-    border: 1px solid var(--sub-header-border);
+    background-color: var(--main-bg-color);
     border-radius: 5px;
     pointer-events: all;
     display: flex;
@@ -29,6 +28,11 @@
     padding: 2px 6px 6px 12px;
     text-align: left;
     line-height: 1.5;
+}
+
+#search {
+    visibility: hidden;
+    pointer-events: none;
 }
 
 #search input[type=text]:focus {
@@ -136,7 +140,9 @@
 }
 
 #balance label {
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     height: 25px;
     line-height: 27px;
     padding: 0 10px;
@@ -158,8 +164,7 @@
 #balance img {
     width: 16px;
     height: 16px;
-    vertical-align: sub;
-    margin-right: 5px;
+    margin: -1px 0 0 9px;
 }
 
 .noAuthQueryUser {

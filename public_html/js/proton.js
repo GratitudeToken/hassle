@@ -9,7 +9,7 @@ let session = undefined
 export const admins = ["lucianape3", "fatzuca", "barbuvlad21", "abubfc"]
 export let user
 export let members
-export let accountTokens
+export let balance
 export let averageRates
 export let minBalance = 0 // 5 GRAT tokens
 export let membership = true // default should be false
@@ -89,9 +89,9 @@ const createBalanceRadios = (tokensArray, rates) => {
         let checked = i === 0 ? 'checked' : ''
         const symbol = Object.keys(el)[0]
         const foundItem = tokensArray.find(item => item.currency === symbol);
-        const balance = foundItem ? foundItem.amount : null;
+        const selectedBalance = foundItem ? foundItem.amount : null;
 
-        $('#balance').innerHTML += `<input id="${symbol}" type="radio" name="balance" value="${symbol}" ${checked}><label class="${symbol}" for="${symbol}"><img src="/svgs/${symbol}.svg"/> ${balance.toFixed(2)}</label></div>`
+        $('#balance').innerHTML += `<input id="${symbol}" type="radio" name="balance" value="${symbol}" ${checked}><label class="${symbol}" for="${symbol}"><span>${selectedBalance.toFixed(2)}</span><img src="/svgs/${symbol}.svg"/></label></div>`
     })
 }
 
@@ -156,17 +156,11 @@ export const userInfo = (user, authenticating) => {
 
         members = data.members
         averageRates = data.averageRates
-        accountTokens = data.accountTokens
-        let selectedToken = JSON.parse(localStorage.getItem('selectedToken'))
-        selectedToken = Object.keys(selectedToken)[0]
-        localStorage.setItem('accountTokens', JSON.stringify(accountTokens))
-        let tokenRate
-        let symbol
-        //let gratBalance = members[user].balance.filter(grat => grat.currency === 'GRAT')
-        // gratBalance = gratBalance[0].amount.toFixed(2)
-        // if (gratBalance >= minBalance && members[user].kyc === true) {
-        //     membership = true
-        // }
+        balance = data.balance
+
+        let tokenRate = JSON.parse(localStorage.getItem('tokenRate'))
+        let symbol = Object.keys(tokenRate)[0]
+
 
         if (query.u) {
             $('#balance').innerHTML = `<a href="/?user=${query.u}" class="noAuthQueryUser"><i><img src="/avatars/${query.u}.webp"/></i>${query.u}</a>`
@@ -181,24 +175,15 @@ export const userInfo = (user, authenticating) => {
 
             $('#hassle').addEventListener("click", e => {
 
-                selectedToken = Object.keys(selectedToken)[0]
-
-                if (!localStorage.getItem('selectedToken')) {
-                    localStorage.setItem('selectedToken', '{"XUSDT": 1}')
-                    tokenRate = { "XUSDT": 1 }
-                    symbol = 'XUSDT'
-                } else {
-                    tokenRate = JSON.parse(localStorage.getItem('selectedToken'))
-                    symbol = Object.keys(tokenRate)[0]
-                }
-
                 let transferAccount
                 let contract
                 let decimals
 
-                transferAccount = accountTokens.filter(item => item.currency === symbol)
+                transferAccount = balance.filter(item => item.currency === symbol)
                 contract = transferAccount[0].contract
                 decimals = transferAccount[0].decimals
+
+
                 if ((!$('.update-it') && $('#total input').value)) {
                     e.srcElement.disabled = true
                     e.srcElement.className = 'updated'
@@ -208,6 +193,7 @@ export const userInfo = (user, authenticating) => {
                     }, "3000")
                     transferPayload(localStorage.getItem('type'), contract, $('#total input[type=number]').value, decimals, symbol)
                 }
+
                 if (!$('.update-it') && (!query.u || user === query.u)) {
                     alert('Nothing to fund here.')
                 }
@@ -215,16 +201,28 @@ export const userInfo = (user, authenticating) => {
 
 
 
-            accountTokens = tokensSortFunction(accountTokens, selectedToken)
-            averageRates = averageRatesSortFunction(averageRates, selectedToken)
+            const sortedBalance = tokensSortFunction(balance, symbol)
 
-            createBalanceRadios(accountTokens, averageRates)
+            // I think this helps when you transfer by pressing #hassle button, otherwise it gives error cause it doesn't find the contract key
+            // if (!balance.some(item => item.currency === 'XUSDT')) {
+            //     balance = [{
+            //         "currency": "XPR",
+            //         "amount": 0,
+            //         "contract": "eosio.token",
+            //         "decimals": 4
+            //     }]
+            //     symbol = 'XPR'
+            // }
+
+            averageRates = averageRatesSortFunction(averageRates, symbol)
+
+            createBalanceRadios(sortedBalance, averageRates)
 
             $('#balance').addEventListener('change', (event) => {
                 event.preventDefault()
                 const filteredObject = averageRates.filter(obj => Object.keys(obj)[0] === event.target.value)
-                localStorage.setItem('selectedToken', JSON.stringify(filteredObject[0]))
-                createBalanceRadios(tokensSortFunction(accountTokens, event.target.value), averageRatesSortFunction(averageRates, event.target.value))
+                localStorage.setItem('tokenRate', JSON.stringify(filteredObject[0]))
+                createBalanceRadios(tokensSortFunction(sortedBalance, event.target.value), averageRatesSortFunction(averageRates, event.target.value))
                 hassleActions(true, true, '')
             })
 
@@ -300,7 +298,7 @@ const logout = async () => {
     session = undefined
     link = undefined
     avatarName.textContent = ''
-    localStorage.removeItem('accountTokens')
+    localStorage.removeItem('balance')
     location.reload()
 }
 
