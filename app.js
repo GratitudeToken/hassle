@@ -52,6 +52,10 @@ app.get('/gethassles', (req, res) => {
     }
 
     fs.writeFileSync(`./hassle-data/members.json`, JSON.stringify(members))
+
+
+    stats[userFile] = [oldHassles.hassles.weekly.length, oldHassles.hassles.monthly.length, oldHassles.hassles.wishlist.length, oldHassles.hassles.crowdfunded.length]
+    fs.writeFileSync(`./hassle-data/stats.json`, JSON.stringify(stats))
   }
 
 
