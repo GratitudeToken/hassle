@@ -26,6 +26,10 @@
     border-radius: 5px
 }
 
+#hassle-stats h3 {
+    margin-top: 5px
+}
+
 #hassle-user * {
     cursor: pointer;
     color: var(--second-contrast);
@@ -57,7 +61,6 @@
 
 #privacy {
     width: 100%;
-    margin-top: 10px;
     background: var(--second-contrast-23);
     overflow: hidden;
     border-radius: 5px;

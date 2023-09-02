@@ -25,6 +25,10 @@ copy {
     z-index: 11;
 }
 
+copy .medium-icon {
+    margin-left: 10px
+}
+
 footer strong {
     font-size: 23px;
     display: block;
